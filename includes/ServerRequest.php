@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $postDry = $_POST['GLD'];
     $postCompleted = $_POST['GLCompleted'];
     $postCheckInTime = $_POST['GLCheckInTime'];
+    
 
     if(isset($_POST['Claim'])){
         if($postCheckInTime == ""){
@@ -102,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if( $postTakenBy == $_SESSION['TakenBy']){
                 $postCompleted = "-1";
                 $sqlUpdate = "UPDATE GroomingLog "
-                    . "SET GLCompleted='".$postCompleted."' "
+                    . "SET GLCompleted='".$postCompleted."', GLCall='-1' "
                     . "WHERE GLSeq=".$postDogID."";
                 $db->query($sqlUpdate);
             }
@@ -110,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if( $postTakenBy == $_SESSION['TakenBy']){
                 $postCompleted = "0";
                 $sqlUpdate = "UPDATE GroomingLog "
-                    . "SET GLCompleted='".$postCompleted."' "
+                    . "SET GLCompleted='".$postCompleted."', GLCall='0' "
                     . "WHERE GLSeq=".$postDogID."";
                 $db->query($sqlUpdate);
             }

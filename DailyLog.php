@@ -25,7 +25,7 @@ include '/includes/navbar.php';
 <?php
 date_default_timezone_set('America/Denver');
 
-$sql = "SELECT GroomingLog.GLTakenBy, GroomingLog.GLGroom, GroomingLog.GLBath, GroomingLog.GLCompleted, GroomingLog.GLSeq, GroomingLog.GLInTime, Pets.PtPetName, Clients.CLLastName, Breeds.BrBreed, GroomingLog.GLCheckInTime, GroomingLog.GLR, GroomingLog.GLB, GroomingLog.GLD, GroomingLog.GLF
+$sql = "SELECT GroomingLog.GLCall, GroomingLog.GLCheckIn, GroomingLog.GLTakenBy, GroomingLog.GLGroom, GroomingLog.GLBath, GroomingLog.GLCompleted, GroomingLog.GLSeq, GroomingLog.GLInTime, Pets.PtPetName, Clients.CLLastName, Breeds.BrBreed, GroomingLog.GLCheckInTime, GroomingLog.GLR, GroomingLog.GLB, GroomingLog.GLD, GroomingLog.GLF
 FROM (Clients INNER JOIN (Pets LEFT JOIN GroomingLog ON Pets.[PtSeq] = GroomingLog.[GLPetID]) ON Clients.CLSeq = Pets.PtOwnerCode) INNER JOIN Breeds ON Pets.PtBreedID = Breeds.BrSeq
 WHERE (((GroomingLog.GLDate)=Date()))
 ORDER BY GroomingLog.GLInTime";
@@ -55,16 +55,23 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)){
         <input type="text" hidden=""value="<?php echo $row['GLCompleted'] ?>"name="GLCompleted">
         <input type="text" hidden=""value="<?php echo $row['GLR'] ?>"name="GLR">
         <input type="text" hidden=""value="<?php echo $row['GLB'] ?>"name="GLB">
-        <input type="text" hidden=""value="<?php echo $row['GLD'] ?>"name="GLD">
+        <input type="text" hidden=""value="<?php echo $row['GLD'] ?>"name="GLD">         
         <input type="text" hidden=""value="<?php echo $row['GLCheckInTime'] ?>"name="GLCheckInTime">
         <button type="submit" name="Claim"class="btn btn-default"><?php if($row['GLTakenBy']!=""){echo $row['GLTakenBy'];}else{echo "Claim";}?></button>
         
     </td>
-    <td><?php echo $notMil;?></td>
-    <td><?php echo $row['PtPetName'];?></td>
-    <td><?php echo $row['CLLastName'];?></td>
-    <td><?php echo $row['BrBreed'];?></td>
-    <td><?php echo $newFormat;?></td>
+    <td>
+        <span class="table-font-norm"><?php echo $notMil;?></span></br>
+        <?php echo $newFormat;?>
+    </td>
+    <td>
+        <span class="table-color2"><?php echo $row['PtPetName'];?></span></br>
+        <?php echo $row['BrBreed'];?>
+    </td>
+    <td>
+        <?php echo $row['CLLastName'];?></br>
+    </td>
+    
     <td>
         <div class="btn-group" role="group" >
             <button type="submit" class="btn btn-default <?php if($row['GLR']!=0) echo"btn-success";?>" name="Rough">Rough</button>

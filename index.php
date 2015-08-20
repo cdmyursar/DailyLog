@@ -33,7 +33,7 @@ include "/includes/header.php";
                     <h4>Welcome back.</h4>
                     <input type="text" id="userName" name="userName" class="form-control input-sm chat-input" placeholder="username" required="" autofocus="" />
                     </br>
-                    <input type="text" id="userPassword" name="userPassword" class="form-control input-sm chat-input" placeholder="password" required=""/>
+                    <input type="password" id="userPassword" name="userPassword" class="form-control input-sm chat-input" placeholder="password" required=""/>
                     </br>
                     <div class="wrapper">
                     <span class="group-btn">   

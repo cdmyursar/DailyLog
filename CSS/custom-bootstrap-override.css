@@ -7,6 +7,21 @@ and open the template in the editor.
     Created on : Apr 5, 2015, 8:18:10 PM
     Author     : KC
 */
+
+.table-font-norm{
+    font-weight: normal;
+}
+.table-color2{
+    color:red;
+}
+.btn{
+    font-weight: bold;
+}
+.table{
+    margin-top: 10px;
+    font-weight: bold;
+    
+}
 .spacemore{
     padding-left:25px;
     padding-right: 25px;
@@ -14,19 +29,23 @@ and open the template in the editor.
 .btn-successInfo{
     background-color: #dff0d8;
     font-weight:bold;
+    color:black;
     
 }
 .btn-warningInfo{
     background-color: #fcf8e3;
     font-weight:bold;
+    color:black;
 }
 .btn-dangerInfo{
     background-color: #f2dede;
     font-weight: bold;
+    color:black;
 }
 .btn-infoInfo{
     background-color: #d9edf7;
     font-weight: bold;
+    color:black;
 }
 .navbar-inverse{
     margin-top: 5px;
@@ -115,6 +134,7 @@ body {
   background-color:#fff;
   -webkit-font-smoothing: antialiased;
   font: normal 14px Roboto,arial,sans-serif;
+  background-image: url('/img/abstract-bubble-background.jpg');
 }
 
 

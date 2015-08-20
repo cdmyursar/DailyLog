@@ -7,6 +7,7 @@
 	letter-spacing: 2px;
         text-align: center;
         width:100%;
+        color:white;
 }
 </style>
 <div id="clockDisplay" class="clockStyle centered"></div>
