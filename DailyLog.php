@@ -34,6 +34,7 @@ $result = $db->query($sql);
 <table id="idTable" class="table table-striped table-bordered">        
 <?php
 while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+    $seq= $row['GLSeq'];
     $timeGL = $row['GLInTime'];  
     $checkinTimeNotMil = $row['GLCheckInTime'];
     $newTimeGL = str_replace("1899-12-30"," ",$timeGL);
@@ -69,7 +70,9 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)){
         <?php echo $row['BrBreed'];?>
     </td>
     <td>
+        
         <?php echo $row['CLLastName'];?></br>
+        <a class="href-button" href=<?php echo"/glDescription.php/?GLSeq=".$seq.""  ?>>Description</a>
     </td>
     
     <td>

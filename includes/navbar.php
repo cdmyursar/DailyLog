@@ -11,8 +11,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="WeekLog.php"><span class="glyphicon glyphicon-user"></span> My Week</a></li>
-                        <li><a href="DailyLog.php"><span class="glyphicon glyphicon-th-list"></span> Today&nbsp;</a></li>
+                        <li><a href="/WeekLog.php"><span class="glyphicon glyphicon-user"></span> My Week</a></li>
+                        <li><a href="/DailyLog.php"><span class="glyphicon glyphicon-th-list"></span> Today&nbsp;</a></li>
                     </ul>
                 </div>
             </div>    
