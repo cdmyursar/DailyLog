@@ -2,6 +2,8 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $postDogID = $_POST["GLSeq"]; 
     $postTakenBy = $_POST['GLTakenBy'];
+    echo $postTakenBy;
+    echo $_SESSION['TakenBy'];
     $postRough = $_POST['GLR'];
     $postBath = $_POST['GLB'];
     $postDry = $_POST['GLD'];
@@ -16,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     . "WHERE GLSeq=".$postDogID."";
             $db->query($sqlUpdateCheckInTime);
         }
-//need to create a seesion variable from login screen with TAKENBY ID
         if($postTakenBy == $_SESSION['TakenBy']){
             $sqlUpdate = "UPDATE GroomingLog "
                         ."SET GLTakenBy='' "
@@ -37,21 +38,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if(isset($_POST['Rough'])){
         // echo "Rough";
-         echo $_SESSION['TakenBy'];
-         echo $postTakenBy;
          if($postRough == "0" || ""){
-             if( $postTakenBy == $_SESSION['TakenBy']){
-                $postDry = "1";
+             if($postTakenBy == $_SESSION['TakenBy']){
+                $postRough = "1";
                 $sqlUpdate = "UPDATE GroomingLog "
-                    . "SET GLR='".$postDry."' "
+                    . "SET GLR='".$postRough."' "
                     . "WHERE GLSeq=".$postDogID."";
                 $db->query($sqlUpdate);
              }
-        }else if ($postRough == "1") {
-            if( $postTakenBy == $_SESSION['TakenBy']){
-                $postDry = "0";
+        }else if ($postRough == 1) {
+            echo "inside if";
+            if($postTakenBy == $_SESSION['TakenBy']){
+                echo "inside else statement";
+                $postRough = "0";
                 $sqlUpdate = "UPDATE GroomingLog "
-                    . "SET GLR='".$postDry."' "
+                    . "SET GLR='".$postRough."' "
                     . "WHERE GLSeq=".$postDogID."";
                 $db->query($sqlUpdate);
             }
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if(isset($_POST['Bath'])){
       //echo "Bath";
-      if($postBath == "0" || ""){
+      if($postBath == "0" || ''){
           if( $postTakenBy == $_SESSION['TakenBy']){
                 $postBath = "1";
                 $sqlUpdate = "UPDATE GroomingLog "
@@ -79,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if(isset($_POST['Dry'])){
         //echo "Dry";
-        if($postDry == "0" || ""){
+        if($postDry == "0" ||''){
             if( $postTakenBy == $_SESSION['TakenBy']){
                 $postDry = "1";
                 $sqlUpdate = "UPDATE GroomingLog "

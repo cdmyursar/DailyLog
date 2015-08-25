@@ -8,26 +8,58 @@ include '/includes/connect.php';
 include '/includes/navbar.php'; 
 include '/includes/ServerRequestDescription.php';
 
-
-$sql = "SELECT GroomingLog.GLDescription "
+$sql = "SELECT GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
+        . "GroomingLog.GLGroom, GroomingLog.GLBath, "
+        . "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate, GroomingLog.GLOthersRate "
         . "FROM GroomingLog "
         . "WHERE GLSeq=$GLSeq";
 $result = $db->query($sql);
+ 
+while($row = $result->fetch(PDO::FETCH_ASSOC)){
+    $description = $row['GLDescription'];
+    $groomRate = number_format($row['GLRate']);
+    $bathRate = number_format($row['GLBathRate']);
+    $boolGroom = $row['GLGroom'];
+    $boolBath = $row['GLBath'];
+    $nailRate = $row['GLNailsRate'];
+    $teethRate = $row['GLOthersRate'];
+    $boolNail = $row['GLNailsID'];
+    $boolTeeth = $row['GLOthersID'];
+}
 
 ?>
 
 <body>
     <div class="container">
         <div class="jumbotron">
-           <div class="btn-group" role="group" >
-                <button name="10"class="btn btn-default">10</button>
-                <button name="7" class="btn btn-default">7</button>
-                <button name="5"class="btn btn-default">5</button>
-                <button name="4"class="btn btn-default">4</button>
-                <button id="0" name="0"class="btn btn-default">0</button>
-            </div>  
-            <textarea id="txtarea"><?php while($row = $result->fetch(PDO::FETCH_ASSOC)){echo $row['GLDescription'];}?>
-            </textarea>
+            <form role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <div class="radio">    
+                    <label class="radio-inline">
+                        <input type="radio"  name="optionsRadios" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush <?php echo $bathRate; ?>
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio"  name="optionsRadios" id="optionsRadios2" value="groom"<?php if($boolGroom=='-1'){echo "checked";}?>> Groom <?php echo $groomRate; ?>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"  name="nailfile" value="" <?php if($boolNail=='-1'){echo "checked";}?>>Nail File
+                    </label>
+                    <label>
+                        <input type="checkbox"  name="teethbrush" value="" <?php if($boolTeeth=='-1'){echo "checked";}?>>Teeth Brush
+                    </label>                   
+                </div>
+                <div class="dropdown">
+                    <select class="form-control">
+                        <option>Deshed $16.00</option>
+                        <option>Deshed $19.00</option>
+                        <option>Deshed $22.00</option>
+                        <option>Deshed $25.00</option>
+                        <option>Deshed $30.00</option>
+                    </select>
+                </div>
+            <textarea id="txtarea"><?php echo $description;?></textarea>
+            </form>
         </div>
        
     </div>

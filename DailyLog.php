@@ -25,7 +25,7 @@ include '/includes/navbar.php';
 <?php
 date_default_timezone_set('America/Denver');
 
-$sql = "SELECT GroomingLog.GLCall, GroomingLog.GLCheckIn, GroomingLog.GLTakenBy, GroomingLog.GLGroom, GroomingLog.GLBath, GroomingLog.GLCompleted, GroomingLog.GLSeq, GroomingLog.GLInTime, Pets.PtPetName, Clients.CLLastName, Breeds.BrBreed, GroomingLog.GLCheckInTime, GroomingLog.GLR, GroomingLog.GLB, GroomingLog.GLD, GroomingLog.GLF
+$sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom, GroomingLog.GLBath, GroomingLog.GLCompleted, GroomingLog.GLSeq, GroomingLog.GLInTime, Pets.PtPetName, Clients.CLLastName, Breeds.BrBreed, GroomingLog.GLCheckInTime, GroomingLog.GLR, GroomingLog.GLB, GroomingLog.GLD, GroomingLog.GLF
 FROM (Clients INNER JOIN (Pets LEFT JOIN GroomingLog ON Pets.[PtSeq] = GroomingLog.[GLPetID]) ON Clients.CLSeq = Pets.PtOwnerCode) INNER JOIN Breeds ON Pets.PtBreedID = Breeds.BrSeq
 WHERE (((GroomingLog.GLDate)=Date()))
 ORDER BY GroomingLog.GLInTime";
@@ -74,13 +74,17 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)){
         <?php echo $row['CLLastName'];?></br>
         <a class="href-button" href=<?php echo"/glDescription.php/?GLSeq=".$seq.""  ?>>Description</a>
     </td>
-    
+    <td>
+        <?php echo "10:00 A.M."; ?>
+    </td>
     <td>
         <div class="btn-group" role="group" >
-            <button type="submit" class="btn btn-default <?php if($row['GLR']!=0) echo"btn-success";?>" name="Rough">Rough</button>
-            <button type="submit" class="btn btn-default <?php if($row['GLB']!=0) echo"btn btn-info";?>" name="Bath">Bath</button>
-            <button type="submit" class="btn btn-default <?php if($row['GLD']!=0) echo"btn btn-warning";?>" name="Dry">Dry</button>
-            <button type="submit" class="btn btn-default <?php if($row['GLCompleted']!=0) echo"btn btn-danger";?>" name="Finished">Finished</button>
+            <button type="submit" class="btn btn-default <?php if($row['GLR']!=0){ echo"btn-success";}?>" name="Rough">Rough</button>
+            <button type="submit" class="btn btn-default <?php if($row['GLB']!=0){ echo"btn btn-info";}?>" name="Bath">Bath</button>
+        </div>
+        <div class="btn-group" role="group" >
+            <button type="submit" class="btn btn-default <?php if($row['GLD']!=0){ echo"btn btn-warning";}?>" name="Dry">Dry</button>
+            <button type="submit" class="btn btn-default <?php if($row['GLCompleted']!=0){ echo"btn btn-danger";}?>" name="Finished">Finished</button>
         </div>  
     </td>
 </form>
