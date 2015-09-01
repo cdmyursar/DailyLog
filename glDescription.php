@@ -2,37 +2,18 @@
 
 session_start();
 $_SESSION['TakenBy'];
-$GLSeq = $_GET['GLSeq'];
 include '/includes/header.php';
 include '/includes/connect.php';
 include '/includes/navbar.php'; 
 include '/includes/ServerRequestDescription.php';
-
-$sql = "SELECT GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
-        . "GroomingLog.GLGroom, GroomingLog.GLBath, "
-        . "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate, GroomingLog.GLOthersRate "
-        . "FROM GroomingLog "
-        . "WHERE GLSeq=$GLSeq";
-$result = $db->query($sql);
- 
-while($row = $result->fetch(PDO::FETCH_ASSOC)){
-    $description = $row['GLDescription'];
-    $groomRate = number_format($row['GLRate']);
-    $bathRate = number_format($row['GLBathRate']);
-    $boolGroom = $row['GLGroom'];
-    $boolBath = $row['GLBath'];
-    $nailRate = $row['GLNailsRate'];
-    $teethRate = $row['GLOthersRate'];
-    $boolNail = $row['GLNailsID'];
-    $boolTeeth = $row['GLOthersID'];
-}
-
 ?>
 
 <body>
+    
     <div class="container">
         <div class="jumbotron">
             <form role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <input type="text" hidden=""value="<?php echo $glSeq ?>"name="GLSeq">
                 <div class="radio">    
                     <label class="radio-inline">
                         <input type="radio"  name="optionsRadios" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush <?php echo $bathRate; ?>
@@ -43,31 +24,65 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"  name="nailfile" value="" <?php if($boolNail=='-1'){echo "checked";}?>>Nail File
+                        <input type="checkbox"  name="nailfile" value="10" <?php if($boolNail=='-1'){echo "checked";}?>>Nail File
                     </label>
                     <label>
-                        <input type="checkbox"  name="teethbrush" value="" <?php if($boolTeeth=='-1'){echo "checked";}?>>Teeth Brush
+                        <input type="checkbox"  name="teethbrush" value="10" <?php if($boolTeeth=='-1'){echo "checked";}?>>Teeth Brush
                     </label>                   
+                    <label>
+                        <input type="checkbox"  name="Dematt" value="15">De-matt
+                    </label>  
+                    <label>
+                        <input type="checkbox"  name="Deskunk" value="30">Deskunk
+                    </label> 
                 </div>
                 <div class="dropdown">
                     <select class="form-control">
-                        <option>Deshed $16.00</option>
-                        <option>Deshed $19.00</option>
-                        <option>Deshed $22.00</option>
-                        <option>Deshed $25.00</option>
-                        <option>Deshed $30.00</option>
+                        <option value="0">Reg. Shampoo</option>
+                        <option value="5">Oatmeal</option>
+                        <option value="5">Hypo</option>
+                        <option value="5">Tar and Sulfur</option>
+                        <option value="5">Whitening</option>
+                        <option value="5">Flea</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select class="form-control">
+                        <option value="0">No Deshed</option>
+                        <option value="16">Deshed $16.00</option>
+                        <option value="19">Deshed $19.00</option>
+                        <option value="22">Deshed $22.00</option>
+                        <option value="25">Deshed $25.00</option>
+                        <option value="30">Deshed $30.00</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select class="form-control">
+                        <option value="0">No FleaDip</option>
+                        <option value="16">FleaDip $16.00</option>
+                        <option value="19">FleaDip $19.00</option>
+                        <option value="22">FleaDip $22.00</option>
+                        <option value="25">FleaDip $25.00</option>
+                        <option value="30">FleaDip $30.00</option>
                     </select>
                 </div>
             <textarea id="txtarea"><?php echo $description;?></textarea>
+            <button class="btn btn-default" type="submit">Save</button>
             </form>
         </div>
-       
+            <div id="signature-pad">
+            <div >
+              <canvas></canvas>
+            </div>
+            <div >
+              <div >Sign above</div>
+              <button class="button clear" data-action="clear">Clear</button>
+              <button class="button save" data-action="save">Save</button>
+            </div>
+          </div>
+        
     </div>
-    <script>
-        $("#0").click(function(){
-            var content = "0";
-            $("#txtarea").append(content);
-        })
-    </script>    
+    <script src="js/signature_pad.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
