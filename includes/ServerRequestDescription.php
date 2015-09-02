@@ -1,6 +1,35 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST"){ 
-    $postDogID = $_POST["GLSeq"];  
+    $postDogID = $_POST["GLSeq"]; 
+    $nailFile=$teethBrush=$deShed=$deSkunk=$fleaDip=$shampoo=$bathOption=$groomOption="";
+    $otherTotal = 0;
+    echo "<h1>inside post method</h1>";
+    
+    if(isset($_POST['nailfile'])){
+        echo "NAIL FILE";
+    }
+    if(isset($_POST['teethbrush'])){
+        echo "TEETH";
+    }
+    if(isset($_POST['dematt'])){
+        echo "dematt";
+    }
+    if(isset($_POST['deskunk'])){
+        echo "SKUNK!";
+    }
+    if(isset($_POST['shampoo'])){
+        echo "<h1>shampoo</h1>";
+        echo $_POST['shampoo'];
+    }
+    if(isset($_POST['deshed'])){
+        echo "<h1>deshed</h1>";
+        echo $_POST['deshed'];
+    }
+    if(isset($_POST['fleadip'])){
+        echo "<h1>fleadip</h1>";
+        echo $_POST['fleadip'];
+    }
+    
     $sql = "SELECT GroomingLog.GLSeq, GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
         . "GroomingLog.GLGroom, GroomingLog.GLBath, "
         . "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate, GroomingLog.GLOthersRate "

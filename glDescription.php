@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $_SESSION['TakenBy'];
 include '/includes/header.php';
@@ -8,8 +7,7 @@ include '/includes/navbar.php';
 include '/includes/ServerRequestDescription.php';
 ?>
 
-<body onselectstart="return false">
-    
+<body>  
     <div class="container">
         <div class="jumbotron">
             <form role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -30,40 +28,40 @@ include '/includes/ServerRequestDescription.php';
                         <input type="checkbox"  name="teethbrush" value="10" <?php if($boolTeeth=='-1'){echo "checked";}?>>Teeth Brush
                     </label>                   
                     <label>
-                        <input type="checkbox"  name="Dematt" value="15">De-matt
+                        <input type="checkbox"  name="dematt" value="15">De-matt
                     </label>  
                     <label>
-                        <input type="checkbox"  name="Deskunk" value="30">Deskunk
+                        <input type="checkbox"  name="deskunk" value="30">Deskunk
                     </label> 
                 </div>
                 <div class="dropdown">
-                    <select class="form-control">
-                        <option value="0">Reg. Shampoo</option>
-                        <option value="5">Oatmeal</option>
-                        <option value="5">Hypo</option>
-                        <option value="5">Tar and Sulfur</option>
-                        <option value="5">Whitening</option>
-                        <option value="5">Flea</option>
+                    <select name="shampoo" class="form-control">
+                        <option name="reg" value="0">Reg. Shampoo</option>
+                        <option name="oatmeal" value="$5.00 Oatmeal">Oatmeal</option>
+                        <option name="hypo" value="$5.00 Hypo">Hypo</option>
+                        <option name="tar" value="$5.00 Tar N Sulfur">Tar and Sulfur</option>
+                        <option name="white" value="$5.00 Whitening">Whitening</option>
+                        <option name="flea" value="$5.00 Flea Shampoo">Flea</option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <select class="form-control">
-                        <option value="0">No Deshed</option>
-                        <option value="16">Deshed $16.00</option>
-                        <option value="19">Deshed $19.00</option>
-                        <option value="22">Deshed $22.00</option>
-                        <option value="25">Deshed $25.00</option>
-                        <option value="30">Deshed $30.00</option>
+                    <select name="deshed" class="form-control">
+                        <option name="nodshd" value="0">No Deshed</option>
+                        <option name="dshd16" value="16">Deshed $16.00</option>
+                        <option name="dshd19" value="19">Deshed $19.00</option>
+                        <option name="dshd22" value="22">Deshed $22.00</option>
+                        <option name="dshd25" value="25">Deshed $25.00</option>
+                        <option name="dshd30" value="30">Deshed $30.00</option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <select class="form-control">
-                        <option value="0">No FleaDip</option>
-                        <option value="16">FleaDip $16.00</option>
-                        <option value="19">FleaDip $19.00</option>
-                        <option value="22">FleaDip $22.00</option>
-                        <option value="25">FleaDip $25.00</option>
-                        <option value="30">FleaDip $30.00</option>
+                    <select name="fleadip" class="form-control">
+                        <option name="nofdip" value="0">No FleaDip</option>
+                        <option name="fdip16" value="16">FleaDip $16.00</option>
+                        <option name="fdip19" value="19">FleaDip $19.00</option>
+                        <option name="fdip22" value="22">FleaDip $22.00</option>
+                        <option name="fdip25" value="25">FleaDip $25.00</option>
+                        <option name="fdip30" value="30">FleaDip $30.00</option>
                     </select>
                 </div>
             <textarea id="txtarea"><?php echo $description;?></textarea>
