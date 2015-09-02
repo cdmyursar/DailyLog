@@ -8,7 +8,7 @@ include '/includes/navbar.php';
 include '/includes/ServerRequestDescription.php';
 ?>
 
-<body>
+<body onselectstart="return false">
     
     <div class="container">
         <div class="jumbotron">
@@ -70,19 +70,6 @@ include '/includes/ServerRequestDescription.php';
             <button class="btn btn-default" type="submit">Save</button>
             </form>
         </div>
-            <div id="signature-pad">
-            <div >
-              <canvas></canvas>
-            </div>
-            <div >
-              <div >Sign above</div>
-              <button class="button clear" data-action="clear">Clear</button>
-              <button class="button save" data-action="save">Save</button>
-            </div>
-          </div>
-        
-    </div>
-    <script src="js/signature_pad.js"></script>
-    <script src="js/app.js"></script>
+    </div>   
 </body>
 </html>

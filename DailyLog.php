@@ -14,6 +14,7 @@ include '/includes/navbar.php';
 
     <button class="btn btn-primary" id="hide">My Grooms</button>
     <button class="btn btn-primary" id="show">Show All</button>
+    <a href="/test.php">go here</a>
     <div class="btn-group spacemore" role="group" >
     <button disabled=""class="btn btn-infoInfo" >Bath</button>
     <button disabled=""class="btn btn-successInfo" >Groom</button>
