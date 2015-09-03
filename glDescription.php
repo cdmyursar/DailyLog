@@ -57,12 +57,12 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                 </div>
                 <div class="dropdown">
                     <select name="shampoo" class="form-control">
-                        <option name="reg" value="0">Reg. Shampoo</option>
-                        <option name="oatmeal" value="$5.00 Oatmeal">Oatmeal</option>
-                        <option name="hypo" value="$5.00 Hypo">Hypo</option>
-                        <option name="tar" value="$5.00 Tar N Sulfur">Tar and Sulfur</option>
-                        <option name="white" value="$5.00 Whitening">Whitening</option>
-                        <option name="flea" value="$5.00 Flea Shampoo">Flea</option>
+                        <option name="reg" class="shampoo" value="0">Reg. Shampoo</option>
+                        <option name="oatmeal" class="shampoo" value="$5.00 Oatmeal">Oatmeal</option>
+                        <option name="hypo" class="shampoo" value="$5.00 Hypo">Hypo</option>
+                        <option name="tar" class="shampoo" value="$5.00 Tar N Sulfur">Tar and Sulfur</option>
+                        <option name="white" class="shampoo" value="$5.00 Whitening">Whitening</option>
+                        <option name="flea" class="shampoo" value="$5.00 Flea Shampoo">Flea</option>
                     </select>
                 </div>
                 <div class="dropdown">
@@ -88,7 +88,20 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
             <textarea id="txtarea"><?php echo $description;?></textarea>
             <button class="btn btn-default" type="submit">Save</button>
             </form>
+              <script type="text/javascript">
+                  var x = document.getElementsByClassName("shampoo").selected;
+                  document.write(x.value);
+        for(var i=0; i<x.length;i++){
+            if(x.checked){
+            document.write(x[i].selected);
+        }
+        }
+    function nailfile(){
+            document.write(forms);
+    }
+    </script>
         </div>
     </div>   
+  
 </body>
 </html>

@@ -82,8 +82,8 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                     </label> 
                 </div>
                 <div class="dropdown">
-                    <select name="shampoo" class="form-control">
-                        <option name="reg" value="0">Reg. Shampoo</option>
+                    <select name="shampoo" onclick="nailfile()" id="shampoo" class="form-control">
+                         <option name="reg" value="0">Reg. Shampoo</option>
                         <option name="oatmeal" value="$5.00 Oatmeal">Oatmeal</option>
                         <option name="hypo" value="$5.00 Hypo">Hypo</option>
                         <option name="tar" value="$5.00 Tar N Sulfur">Tar and Sulfur</option>
@@ -114,7 +114,20 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
             <textarea id="txtarea"><?php echo $description;?></textarea>
             <button class="btn btn-default" type="submit">Save</button>
             </form>
+    
         </div>
     </div>   
+<script>
+            document.getElementById("shampoo").onclick = function()
+            { nailfile()};
+            
+    function nailfile(){
+            
+             var x = document.getElementById("shampoo");
+                  var result = x.options[x.selectedIndex].text;
+                  
+    document.write(result);
+    }
+</script>
 </body>
 </html>
