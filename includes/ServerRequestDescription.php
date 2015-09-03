@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $postDogID = $_POST["GLSeq"]; 
     $nailFile=$teethBrush=$deShed=$deSkunk=$fleaDip=$shampoo=$bathOption=$groomOption="";
     $otherTotal = 0;
-    echo "<h1>inside post method</h1>";
+    
     
     if(isset($_POST['nailfile'])){
         echo "NAIL FILE";

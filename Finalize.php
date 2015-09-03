@@ -5,17 +5,44 @@ include '/includes/header.php';
 include '/includes/connect.php';
 include '/includes/navbar.php'; 
 
-$getGLSeq = $_GET['GLSeq'];
-
+$postGLSeq = $_POST["GLSeq"]; 
+$nailFile=$teethBrush=$deShed=$deSkunk=$fleaDip=$shampoo=$bathOption=$groomOption="";
+$otherTotal = 0;
+    
+//    if(isset($_POST['nailfile'])){
+//        echo "NAIL FILE";
+//    }
+//    if(isset($_POST['teethbrush'])){
+//        echo "TEETH";
+//    }
+//    if(isset($_POST['dematt'])){
+//        echo "dematt";
+//    }
+//    if(isset($_POST['deskunk'])){
+//        echo "SKUNK!";
+//    }
+//    if(isset($_POST['shampoo'])){
+//        echo "<h1>shampoo</h1>";
+//        echo $_POST['shampoo'];
+//    }
+//    if(isset($_POST['deshed'])){
+//        echo "<h1>deshed</h1>";
+//        echo $_POST['deshed'];
+//    }
+//    if(isset($_POST['fleadip'])){
+//        echo "<h1>fleadip</h1>";
+//        echo $_POST['fleadip'];
+//    }
+    
 $sql = "SELECT GroomingLog.GLSeq, GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
-    . "GroomingLog.GLGroom, GroomingLog.GLBath, "
-    . "GroomingLog.GLSignature, GroomingLog.GLDeshed, GroomingLog.GLFlea, GroomingLog.GLSkunk, "
-    . "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate, GroomingLog.GLOthersRate "
-    . "FROM GroomingLog "
-    . "WHERE GLSeq=$getGLSeq";
+. "GroomingLog.GLGroom, GroomingLog.GLBath, "
+. "GroomingLog.GLSignature, GroomingLog.GLDeshed, GroomingLog.GLFlea, GroomingLog.GLSkunk, "
+. "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate, GroomingLog.GLOthersRate "
+. "FROM GroomingLog "
+. "WHERE GLSeq=$postGLSeq";
 $result = $db->query($sql);
 
-while($row = $result->fetch(PDO::FETCH_ASSOC)){    
+while($row = $result->fetch(PDO::FETCH_ASSOC)){        
     $description = $row['GLDescription'];
     $groomRate = number_format($row['GLRate']);
     $bathRate = number_format($row['GLBathRate']);
@@ -24,15 +51,14 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
     $nailRate = $row['GLNailsRate'];
     $teethRate = $row['GLOthersRate'];
     $boolNail = $row['GLNailsID'];
-    $boolTeeth = $row['GLOthersID'];
+    $boolTeeth = $row['GLOthersID']; 
 }
-?>
-
+?> 
 <body>  
     <div class="container">
         <div class="jumbotron">
-            <form role="form" method="post" action="/Finalize.php">
-                <input type="text" hidden="" value="<?php echo $getGLSeq?>"name="GLSeq">
+            <form role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <input type="text" hidden=""value="<?php echo $postGLSeq ?>"name="GLSeq">
                 <div class="radio">    
                     <label class="radio-inline">
                         <input type="radio"  name="optionsRadios" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush <?php echo $bathRate; ?>
