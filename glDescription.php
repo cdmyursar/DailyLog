@@ -59,7 +59,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                     </label> 
                 </div>
                 <div class="dropdown">
-                    <select name="shampoo" onchange="myFunction()"class="form-control">
+                    <select name="shampoo" onchange="myFunction();"class="form-control">
                         <option name="reg" class="shampoo" value="">Reg. Shampoo</option>
                         <option name="oatmeal" class="shampoo" value="$5.00 Oatmeal">Oatmeal</option>
                         <option name="hypo" class="shampoo" value="$5.00 Hypo">Hypo</option>
@@ -92,61 +92,34 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
             </form>
             <div id="demo"></div>
 <script type="text/javascript">
-    var x = document.getElementsByClassName("shampoo");
-    var txtarea = document.getElementById("txtarea").innerHTML;
-//    var txtsplit = txtarea.split('\n');
-    var charaat =  txtarea.charAt("0");
-    var indextxt = txtarea.indexOf('--INSTRUCTIONS--');
-    var indextxt2 = txtarea.indexOf('addons');
-    var indextxt3 = txtarea.indexOf('--ADDON\'S--');
-    var newtxtarea = "";
-    console.log("console");
-    
-    if(indextxt2 == -1){
-        document.getElementById("txtarea").innerHTML +="\n addons";
-        newtxtarea = document.getElementById("txtarea").innerHTML;
-    }
-    var txtsplit = newtxtarea.split('\n');
-    document.write(txtsplit[4]);
-    var du = txtsplit;
-    console.log(du);
-    
-     if(du[4].localeCompare("addons")){
-            txtsplit.splice(2,1);
-            var joinback = txtsplit.join("\n");
-            
-            console.log(joinback);
-        //var joinText = spliceText.join('\n');
-            
-            //console.log(joinText);
-            document.write("inside if");
-            document.write(txtsplit[0]);
-        }else{
-            console.log("else");
+     var selShampoo = document.getElementsByClassName("shampoo");
+        var txtarea = document.getElementById("txtarea").innerHTML;  
+        var indextxt2 = txtarea.indexOf("addons");
+        var txtsplit = txtarea.split('\n');
+        
+        if(indextxt2 == "-1"){
+            document.getElementById("txtarea").innerHTML +="\naddons";             
         }
-//    for(var o = 0; o<txtsplit.length;o++){
-//        if(txtsplit[o]=="ADD-ONS"){
-//            document.write("inside if");
-//            document.write(o);
-//        }
-        //document.getElementById("demo").innerHTML += txtsplit[o];
-            
-//    }
-    //document.write(txtarea.length);
-    //document.write(indextxt);
-    //document.write(indextxt2);
-    if(indextxt2 == -1){
-        document.getElementById("txtarea").innerHTML +="\n ADD-ONS";
-    }
-    
+  
     function myFunction() {
-        for(var i=0; i<x.length;i++){
-            if(x[i].selected){
-                document.getElementById("txtarea").innerHTML +="\n"+x[i].value;                
-                
-                
-                
-                
+        
+        document.getElementById("demo").innerHTML = "indexOf "+ indextxt2;
+        txtarea = document.getElementById("txtarea").innerHTML;
+         
+        for(var i=0; i<selShampoo.length;i++){
+            if(selShampoo[i].selected){
+                for(var j=0;j< txtsplit.length; j++){
+                    if(txtsplit[j]==selShampoo[i].selected){
+                        document.getElementById("demo").innerHTML = "inside" ;                
+                        txtsplit.splice(j-1,1);
+                        var joinback = txtsplit.join("\n");
+                        //document.write(joinback);
+                        //document.write(" inside if ");
+                    }else{
+                        document.getElementById("txtarea").innerHTML +="\n"+selShampoo[i].value;                
+                        document.getElementById("demo").innerHTML += "f" ;                
+                    }
+                } 
             }
         }
     }
