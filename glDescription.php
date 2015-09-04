@@ -7,7 +7,7 @@ include '/includes/navbar.php';
 
 $getGLSeq = $_GET['GLSeq'];
 
-$sql = "SELECT GroomingLog.GLSeq, GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
+$sql = "SELECT GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
     . "GroomingLog.GLGroom, GroomingLog.GLBath, "
     . "GroomingLog.GLSignature, GroomingLog.GLDeshed, GroomingLog.GLFlea, GroomingLog.GLSkunk, "
     . "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate, GroomingLog.GLOthersRate "
@@ -53,16 +53,18 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                     </label>  
                     <label>
                         <input type="checkbox"  name="deskunk" value="30">Deskunk
+                    <label>
+                        <input type="checkbox"  name="flea" value="5">Flea Shampoo
+                    </label> 
                     </label> 
                 </div>
                 <div class="dropdown">
-                    <select name="shampoo" class="form-control">
-                        <option name="reg" class="shampoo" value="0">Reg. Shampoo</option>
+                    <select name="shampoo" onchange="myFunction()"class="form-control">
+                        <option name="reg" class="shampoo" value="">Reg. Shampoo</option>
                         <option name="oatmeal" class="shampoo" value="$5.00 Oatmeal">Oatmeal</option>
                         <option name="hypo" class="shampoo" value="$5.00 Hypo">Hypo</option>
                         <option name="tar" class="shampoo" value="$5.00 Tar N Sulfur">Tar and Sulfur</option>
                         <option name="white" class="shampoo" value="$5.00 Whitening">Whitening</option>
-                        <option name="flea" class="shampoo" value="$5.00 Flea Shampoo">Flea</option>
                     </select>
                 </div>
                 <div class="dropdown">
@@ -88,18 +90,67 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
             <textarea id="txtarea"><?php echo $description;?></textarea>
             <button class="btn btn-default" type="submit">Save</button>
             </form>
-              <script type="text/javascript">
-                  var x = document.getElementsByClassName("shampoo").selected;
-                  document.write(x.value);
-        for(var i=0; i<x.length;i++){
-            if(x.checked){
-            document.write(x[i].selected);
-        }
-        }
-    function nailfile(){
-            document.write(forms);
+            <div id="demo"></div>
+<script type="text/javascript">
+    var x = document.getElementsByClassName("shampoo");
+    var txtarea = document.getElementById("txtarea").innerHTML;
+//    var txtsplit = txtarea.split('\n');
+    var charaat =  txtarea.charAt("0");
+    var indextxt = txtarea.indexOf('--INSTRUCTIONS--');
+    var indextxt2 = txtarea.indexOf('addons');
+    var indextxt3 = txtarea.indexOf('--ADDON\'S--');
+    var newtxtarea = "";
+    console.log("console");
+    
+    if(indextxt2 == -1){
+        document.getElementById("txtarea").innerHTML +="\n addons";
+        newtxtarea = document.getElementById("txtarea").innerHTML;
     }
-    </script>
+    var txtsplit = newtxtarea.split('\n');
+    document.write(txtsplit[4]);
+    var du = txtsplit;
+    console.log(du);
+    
+     if(du[4].localeCompare("addons")){
+            txtsplit.splice(2,1);
+            var joinback = txtsplit.join("\n");
+            
+            console.log(joinback);
+        //var joinText = spliceText.join('\n');
+            
+            //console.log(joinText);
+            document.write("inside if");
+            document.write(txtsplit[0]);
+        }else{
+            console.log("else");
+        }
+//    for(var o = 0; o<txtsplit.length;o++){
+//        if(txtsplit[o]=="ADD-ONS"){
+//            document.write("inside if");
+//            document.write(o);
+//        }
+        //document.getElementById("demo").innerHTML += txtsplit[o];
+            
+//    }
+    //document.write(txtarea.length);
+    //document.write(indextxt);
+    //document.write(indextxt2);
+    if(indextxt2 == -1){
+        document.getElementById("txtarea").innerHTML +="\n ADD-ONS";
+    }
+    
+    function myFunction() {
+        for(var i=0; i<x.length;i++){
+            if(x[i].selected){
+                document.getElementById("txtarea").innerHTML +="\n"+x[i].value;                
+                
+                
+                
+                
+            }
+        }
+    }
+</script>
         </div>
     </div>   
   
