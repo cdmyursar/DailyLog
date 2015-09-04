@@ -59,70 +59,120 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                     </label> 
                 </div>
                 <div class="dropdown">
-                    <select name="shampoo" onchange="myFunction();"class="form-control">
-                        <option name="reg" class="shampoo" value="">Reg. Shampoo</option>
-                        <option name="oatmeal" class="shampoo" value="$5.00 Oatmeal">Oatmeal</option>
-                        <option name="hypo" class="shampoo" value="$5.00 Hypo">Hypo</option>
-                        <option name="tar" class="shampoo" value="$5.00 Tar N Sulfur">Tar and Sulfur</option>
-                        <option name="white" class="shampoo" value="$5.00 Whitening">Whitening</option>
+                    <select onchange="shampooSelect();"class="form-control">
+                        <option class="shampoo" value=" ">Nootie Shampoo</option>
+                        <option class="shampoo" value="Shampoo: $5.00 Oatmeal">Oatmeal</option>
+                        <option class="shampoo" value="Shampoo: $5.00 Hypo">Hypo</option>
+                        <option class="shampoo" value="Shampoo: $5.00 Tar N Sulfur">Tar and Sulfur</option>
+                        <option class="shampoo" value="Shampoo: $5.00 Whitening">Whitening</option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <select name="deshed" class="form-control">
-                        <option name="nodshd" value="0">No Deshed</option>
-                        <option name="dshd16" value="16">Deshed $16.00</option>
-                        <option name="dshd19" value="19">Deshed $19.00</option>
-                        <option name="dshd22" value="22">Deshed $22.00</option>
-                        <option name="dshd25" value="25">Deshed $25.00</option>
-                        <option name="dshd30" value="30">Deshed $30.00</option>
+                    <select name="deshed" onchange="deshedSelect();" class="form-control">
+                        <option  class="deshed" value=" ">Deshed: None</option>
+                        <option  class="deshed" value="Deshed: $16.00">Deshed: $16.00</option>
+                        <option  class="deshed" value="Deshed: $19.00">Deshed: $19.00</option>
+                        <option  class="deshed" value="Deshed: $22.00">Deshed: $22.00</option>
+                        <option  class="deshed" value="Deshed: $25.00">Deshed: $25.00</oDeshed: $25.00"ption>
+                        <option  class="deshed" value="Deshed: $30.00">Deshed: $30.00</option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <select name="fleadip" class="form-control">
-                        <option name="nofdip" value="0">No FleaDip</option>
-                        <option name="fdip16" value="16">FleaDip $16.00</option>
-                        <option name="fdip19" value="19">FleaDip $19.00</option>
-                        <option name="fdip22" value="22">FleaDip $22.00</option>
-                        <option name="fdip25" value="25">FleaDip $25.00</option>
-                        <option name="fdip30" value="30">FleaDip $30.00</option>
+                    <select name="fleadip" onchange="fleaSelect();"class="form-control">
+                        <option  class="flea" value=" ">FleaDip: None</option>
+                        <option  class="flea" value="FleaDip: $16.00">FleaDip: $16.00</option>
+                        <option  class="flea" value="FleaDip: $19.00">FleaDip: $19.00</option>
+                        <option  class="flea" value="FleaDip: $22.00">FleaDip: $22.00</option>
+                        <option  class="flea" value="FleaDip: $25.00">FleaDip: $25.00</option>
+                        <option  class="flea" value="FleaDip: $30.00">FleaDip: $30.00</option>
                     </select>
                 </div>
             <textarea id="txtarea"><?php echo $description;?></textarea>
             <button class="btn btn-default" type="submit">Save</button>
             </form>
-            <div id="demo"></div>
-<script type="text/javascript">
-     var selShampoo = document.getElementsByClassName("shampoo");
-        var txtarea = document.getElementById("txtarea").innerHTML;  
-        var indextxt2 = txtarea.indexOf("addons");
-        var txtsplit = txtarea.split('\n');
-        
-        if(indextxt2 == "-1"){
-            document.getElementById("txtarea").innerHTML +="\naddons";             
+            
+<script type="text/javascript">    
+var selShampoo = document.getElementsByClassName("shampoo");
+var selDeshed = document.getElementsByClassName("deshed");
+var selFlea = document.getElementsByClassName("flea");
+var txtarea = document.getElementById("txtarea").innerHTML;  
+var parsTxtArea = txtarea.split("\n");
+var indextxt2 = txtarea.indexOf("addons");
+
+if(indextxt2 == "-1"){
+    document.getElementById("txtarea").innerHTML +="\n\naddons";             
+}
+
+//parse textarea for any addons, set selectors to proper addons
+//shampoo
+for(var j=0;j< parsTxtArea.length; j++){
+    for(var t = 0;t<selShampoo.length;t++){
+        if(parsTxtArea[j]===selShampoo[t].value){
+            selShampoo[t].selected = 'selected';
         }
-  
-    function myFunction() {
-        
-        document.getElementById("demo").innerHTML = "indexOf "+ indextxt2;
-        txtarea = document.getElementById("txtarea").innerHTML;
-         
-        for(var i=0; i<selShampoo.length;i++){
-            if(selShampoo[i].selected){
-                for(var j=0;j< txtsplit.length; j++){
-                    if(txtsplit[j]==selShampoo[i].selected){
-                        document.getElementById("demo").innerHTML = "inside" ;                
-                        txtsplit.splice(j-1,1);
-                        var joinback = txtsplit.join("\n");
-                        //document.write(joinback);
-                        //document.write(" inside if ");
-                    }else{
-                        document.getElementById("txtarea").innerHTML +="\n"+selShampoo[i].value;                
-                        document.getElementById("demo").innerHTML += "f" ;                
-                    }
-                } 
+    }
+}
+//deshed
+for(var j=0;j< parsTxtArea.length; j++){
+    for(var t = 0;t<selDeshed.length;t++){
+        if(parsTxtArea[j]===selDeshed[t].value){
+            selDeshed[t].selected = 'selected';
+        }
+    }
+}
+//fleaDip
+for(var j=0;j< parsTxtArea.length; j++){
+    for(var t = 0;t<selFlea.length;t++){
+        if(parsTxtArea[j]===selFlea[t].value){
+            selFlea[t].selected = 'selected';
+        }
+    }
+}
+
+
+
+function fleaSelect(){
+    //Get user selected flea dip
+    for(var i=0; i<selFlea.length;i++){
+        if(selFlea[i].selected){
+            editTxtArea(selFlea[i].value, selFlea);
+        }
+    }
+}   
+
+function deshedSelect(){
+    //Get user selected deshed
+    for(var i=0; i<selDeshed.length;i++){
+        if(selDeshed[i].selected){
+            editTxtArea(selDeshed[i].value, selDeshed);
+        }
+    }
+}  
+function shampooSelect() {        
+    //Get user selected shampoo
+    for(var i=0; i<selShampoo.length;i++){
+        if(selShampoo[i].selected){
+            editTxtArea(selShampoo[i].value, selShampoo);
+        }
+    }
+}
+
+function editTxtArea(value,data){
+    var txtarea = document.getElementById("txtarea").innerHTML;  
+    var txtsplit = txtarea.split('\n');
+    //clear text area of any matching shampoos in the text area
+    for(var j=0;j< txtsplit.length; j++){
+        for(var t = 0;t<data.length;t++){
+            if(txtsplit[j]===data[t].value){
+                txtsplit.splice(j,1);
+                var joinback = txtsplit.join("\n");
+                document.getElementById("txtarea").innerHTML = joinback;                               
             }
         }
     }
+    document.getElementById("txtarea").innerHTML +="\n"+value;                               
+}
+
 </script>
         </div>
     </div>   
