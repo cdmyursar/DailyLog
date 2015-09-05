@@ -105,7 +105,7 @@ if(indextxt2 == "-1"){
 
 //parse textarea for any addons, set selectors to proper addons
 //shampoo
-for(var j=0;j< parsTxtArea.length; j++){
+for(var j=0;j< parsTxtArea.length; j++){   
     for(var t = 0;t<selShampoo.length;t++){
         if(parsTxtArea[j]===selShampoo[t].value){
             selShampoo[t].selected = 'selected';
@@ -113,7 +113,7 @@ for(var j=0;j< parsTxtArea.length; j++){
     }
 }
 //deshed
-for(var j=0;j< parsTxtArea.length; j++){
+for(var j=0;j< parsTxtArea.length; j++){   
     for(var t = 0;t<selDeshed.length;t++){
         if(parsTxtArea[j]===selDeshed[t].value){
             selDeshed[t].selected = 'selected';
@@ -121,7 +121,7 @@ for(var j=0;j< parsTxtArea.length; j++){
     }
 }
 //fleaDip
-for(var j=0;j< parsTxtArea.length; j++){
+for(var j=0;j< parsTxtArea.length; j++){    
     for(var t = 0;t<selFlea.length;t++){
         if(parsTxtArea[j]===selFlea[t].value){
             selFlea[t].selected = 'selected';
@@ -158,7 +158,7 @@ function shampooSelect() {
 }
 
 function editTxtArea(value,data){
-    var txtarea = document.getElementById("txtarea").innerHTML;  
+    var txtarea = document.getElementById("txtarea").value;  
     var txtsplit = txtarea.split('\n');
     //clear text area of any matching shampoos in the text area
     for(var j=0;j< txtsplit.length; j++){
@@ -166,11 +166,11 @@ function editTxtArea(value,data){
             if(txtsplit[j]===data[t].value){
                 txtsplit.splice(j,1);
                 var joinback = txtsplit.join("\n");
-                document.getElementById("txtarea").innerHTML = joinback;                               
+                document.getElementById("txtarea").value = joinback;                               
             }
         }
     }
-    document.getElementById("txtarea").innerHTML +="\n"+value;                               
+    document.getElementById("txtarea").value +="\n"+value;                               
 }
 
 </script>
