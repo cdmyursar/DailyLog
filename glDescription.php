@@ -22,9 +22,9 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
     $boolGroom = $row['GLGroom'];
     $boolBath = $row['GLBath'];
     $nailRate = $row['GLNailsRate'];
-    $teethRate = $row['GLOthersRate'];
+    $otherRate = $row['GLOthersRate'];
     $boolNail = $row['GLNailsID'];
-    $boolTeeth = $row['GLOthersID'];
+    $boolOther = $row['GLOthersID'];
 }
 ?>
 
@@ -33,6 +33,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
         <div class="jumbotron">
             <form role="form" method="post" action="/Finalize.php">
                 <input type="text" hidden="" value="<?php echo $getGLSeq?>"name="GLSeq">
+                <input type="text" hidden="" value="" name="otherRate" id="otherRate">
                 <div class="radio">    
                     <label class="radio-inline">
                         <input type="radio"  name="optionsRadios" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush <?php echo $bathRate; ?>
@@ -43,18 +44,18 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"  name="nailfile" value="10" <?php if($boolNail=='-1'){echo "checked";}?>>Nail File
+                        <input type="checkbox" id="nailfile" onchange="nailFileSelect();" name="nailfile" value="Nail File: $10.00" <?php if($boolNail=='-1'){echo "checked";}?>>Nail File
                     </label>
                     <label>
-                        <input type="checkbox"  name="teethbrush" value="10" <?php if($boolTeeth=='-1'){echo "checked";}?>>Teeth Brush
+                        <input type="checkbox" id="teethbrush" onchange="teethSelect();" name="teethbrush" value="Teeth Brush: $10.00">Teeth Brush
                     </label>                   
                     <label>
-                        <input type="checkbox"  name="dematt" value="15">De-matt
+                        <input type="checkbox" id="dematt" onchange="demattSelect();"name="dematt" value="De-matt: $15.00">De-matt
                     </label>  
                     <label>
-                        <input type="checkbox"  name="deskunk" value="30">Deskunk
+                        <input type="checkbox" id="deskunk" onchange="deskunkSelect();"name="deskunk" value="Deskunk: $30.00">Deskunk
                     <label>
-                        <input type="checkbox"  name="flea" value="5">Flea Shampoo
+                        <input type="checkbox" id="flea" onchange="fleaSelect();"name="flea" value="Flea Shampoo: $5.00">Flea Shampoo
                     </label> 
                     </label> 
                 </div>
@@ -73,12 +74,12 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
                         <option  class="deshed" value="Deshed: $16.00">Deshed: $16.00</option>
                         <option  class="deshed" value="Deshed: $19.00">Deshed: $19.00</option>
                         <option  class="deshed" value="Deshed: $22.00">Deshed: $22.00</option>
-                        <option  class="deshed" value="Deshed: $25.00">Deshed: $25.00</oDeshed: $25.00"ption>
+                        <option  class="deshed" value="Deshed: $25.00">Deshed: $25.00</option>
                         <option  class="deshed" value="Deshed: $30.00">Deshed: $30.00</option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <select name="fleadip" onchange="fleaSelect();"class="form-control">
+                    <select name="fleadip" onchange="fleaDipSelect();"class="form-control">
                         <option  class="flea" value=" ">FleaDip: None</option>
                         <option  class="flea" value="FleaDip: $16.00">FleaDip: $16.00</option>
                         <option  class="flea" value="FleaDip: $19.00">FleaDip: $19.00</option>
@@ -91,89 +92,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
             <button class="btn btn-default" type="submit">Save</button>
             </form>
             
-<script type="text/javascript">    
-var selShampoo = document.getElementsByClassName("shampoo");
-var selDeshed = document.getElementsByClassName("deshed");
-var selFlea = document.getElementsByClassName("flea");
-var txtarea = document.getElementById("txtarea").innerHTML;  
-var parsTxtArea = txtarea.split("\n");
-var indextxt2 = txtarea.indexOf("addons");
-
-if(indextxt2 == "-1"){
-    document.getElementById("txtarea").innerHTML +="\n\naddons";             
-}
-
-//parse textarea for any addons, set selectors to proper addons
-//shampoo
-for(var j=0;j< parsTxtArea.length; j++){   
-    for(var t = 0;t<selShampoo.length;t++){
-        if(parsTxtArea[j]===selShampoo[t].value){
-            selShampoo[t].selected = 'selected';
-        }
-    }
-}
-//deshed
-for(var j=0;j< parsTxtArea.length; j++){   
-    for(var t = 0;t<selDeshed.length;t++){
-        if(parsTxtArea[j]===selDeshed[t].value){
-            selDeshed[t].selected = 'selected';
-        }
-    }
-}
-//fleaDip
-for(var j=0;j< parsTxtArea.length; j++){    
-    for(var t = 0;t<selFlea.length;t++){
-        if(parsTxtArea[j]===selFlea[t].value){
-            selFlea[t].selected = 'selected';
-        }
-    }
-}
-
-
-
-function fleaSelect(){
-    //Get user selected flea dip
-    for(var i=0; i<selFlea.length;i++){
-        if(selFlea[i].selected){
-            editTxtArea(selFlea[i].value, selFlea);
-        }
-    }
-}   
-
-function deshedSelect(){
-    //Get user selected deshed
-    for(var i=0; i<selDeshed.length;i++){
-        if(selDeshed[i].selected){
-            editTxtArea(selDeshed[i].value, selDeshed);
-        }
-    }
-}  
-function shampooSelect() {        
-    //Get user selected shampoo
-    for(var i=0; i<selShampoo.length;i++){
-        if(selShampoo[i].selected){
-            editTxtArea(selShampoo[i].value, selShampoo);
-        }
-    }
-}
-
-function editTxtArea(value,data){
-    var txtarea = document.getElementById("txtarea").value;  
-    var txtsplit = txtarea.split('\n');
-    //clear text area of any matching shampoos in the text area
-    for(var j=0;j< txtsplit.length; j++){
-        for(var t = 0;t<data.length;t++){
-            if(txtsplit[j]===data[t].value){
-                txtsplit.splice(j,1);
-                var joinback = txtsplit.join("\n");
-                document.getElementById("txtarea").value = joinback;                               
-            }
-        }
-    }
-    document.getElementById("txtarea").value +="\n"+value;                               
-}
-
-</script>
+            <script src="/js/TxtAreaModify.js"></script>
         </div>
     </div>   
   
