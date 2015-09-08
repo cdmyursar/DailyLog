@@ -1,4 +1,3 @@
-var otherRate = 0;
 var selNailFile = document.getElementById("nailfile");
 var selTeeth = document.getElementById("teethbrush");
 var selDematt = document.getElementById("dematt");
@@ -9,11 +8,16 @@ var selDeshed = document.getElementsByClassName("deshed");
 var selFlea = document.getElementsByClassName("flea");
 var txtarea = document.getElementById("txtarea").innerHTML;  
 var parsTxtArea = txtarea.split("\n");
-var indextxt2 = txtarea.indexOf("addons");
+var checkAddons = txtarea.indexOf("--ADDONS--");
+var checkInstructions = txtarea.indexOf("--INSTRUCTIONS--");
 
+//
 //check txtarea for "addons" if not found, add it
-if(indextxt2 == "-1"){
-    document.getElementById("txtarea").innerHTML +="\n\naddons";             
+//if(checkInstructions == "-1"){
+//    document.getElementById("txtarea").innerHTML +="\n\n--INSTRUCTIONS--";             
+//}
+if(checkAddons == "-1"){
+    document.getElementById("txtarea").innerHTML +="\n\n--ADDONS--";             
 }
 
 //parse textarea for any addons listed, set checkboxs or selectors to 
@@ -25,50 +29,39 @@ for(var j=0;j< parsTxtArea.length; j++){
     }
     if(parsTxtArea[j]===selTeeth.value){
         selTeeth.checked = 1;
-        otherRate += parseInt(10);
     }
     if(parsTxtArea[j]===selDematt.value){
         selDematt.checked = 1;
-        otherRate += parseInt(15);
     }
     if(parsTxtArea[j]===selDeskunk.value){
         selDeskunk.checked = 1;
-        otherRate += parseInt(30);
     }
     if(parsTxtArea[j]===selFleaShampoo.value){
         selFleaShampoo.checked = 1;
-        otherRate += parseInt(5);
     }
 }
 
 //check if Nail File was checked inside Kennel Connection, if true add to txtarea.
-if(selNailFile.checked){
-        document.getElementById("txtarea").value +="\n"+selNailFile.value;                               
-        document.write(otherRate+=parseInt(10));  
-}
+//if(selNailFile.checked){
+//        document.getElementById("txtarea").value +="\n"+selNailFile.value;                               
+//}
 
-//Check if any of the addons are listed in txtarea, then select the correct addon
+//Check if any of the addons are listed in txtarea, then set the correct addon
+// example checkbox checked or option selected
 //shampoo
-for(var j=0;j< parsTxtArea.length; j++){   
+for(var j = 0;j< parsTxtArea.length; j++){   
     for(var t = 0;t<selShampoo.length;t++){
         if(parsTxtArea[j]===selShampoo[t].value){
             selShampoo[t].selected = 'selected';
-            otherRate += parseInt(5);
         }
     }
-}
-//deshed
-for(var j=0;j< parsTxtArea.length; j++){   
+    //deshed
     for(var t = 0;t<selDeshed.length;t++){
         if(parsTxtArea[j]===selDeshed[t].value){
             selDeshed[t].selected = 'selected';
-            var amount = selDeshed[t].value.substr(9,2);
-            otherRate += parseInt(amount);
         }
     }
-}
-//fleaDip
-for(var j=0;j< parsTxtArea.length; j++){    
+    //fleaDip
     for(var t = 0;t<selFlea.length;t++){
         if(parsTxtArea[j]===selFlea[t].value){
             selFlea[t].selected = 'selected';
@@ -157,7 +150,7 @@ function editTxtAreaCheck(data){
     var txtarea = document.getElementById("txtarea").value;  
     var txtsplit = txtarea.split('\n');
     for(var j=0;j< txtsplit.length; j++){
-        if(txtsplit[j]==data){
+        if(txtsplit[j]===data){
             txtsplit.splice(j,1);
             var joinback = txtsplit.join("\n");
             document.getElementById("txtarea").value = joinback;                               
@@ -181,4 +174,8 @@ function editTxtArea(value,data){
         }
     }
     document.getElementById("txtarea").value +="\n"+value;                               
+}
+
+function jsFunction(){
+    document.getElementById("txtarea").value +="\nALO";   
 }

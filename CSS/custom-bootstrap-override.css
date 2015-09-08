@@ -7,6 +7,14 @@ and open the template in the editor.
     Created on : Apr 5, 2015, 8:18:10 PM
     Author     : KC
 */
+.borderInstr{
+    border-width: 1px;
+    border-style: solid;
+    
+}
+.spacer{
+    padding-top: 10px;
+}
 textarea{
     resize:none;
     width:100%;
