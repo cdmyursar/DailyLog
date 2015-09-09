@@ -54,7 +54,7 @@ $postGLSeq = $_POST["GLSeq"];
 <body>
     <div class="container">
         <div class="jumbotron">
-            <form role="form" method="POST" action="<?php echo htmlspecialchars($txtArea);?>">
+            <form role="form" method="POST" action="">
                 <div>
                     <h2>Instructions</h2>
                     <?php 
@@ -68,24 +68,8 @@ $postGLSeq = $_POST["GLSeq"];
                 </div>
             <button class="btn btn-default" type="submit">Save</button>
             </form>
-            <div id="signature-pad" class="m-signature-pad">
-                <div class="m-signature-pad--body">
-                    <canvas></canvas>
-                </div>
-                <div class="m-signature-pad--footer">
-                    <div class="description">Sign above</div>
-                    <button class="button clear" data-action="clear">Clear</button>
-                    <button class="button save" data-action="save">Save</button>
-                </div>
-              </div>
-
-  
-            
-    
         </div>
     </div>   
-<script src="js/signature_pad.js"></script>
-<script src="js/app.js"></script>
 <?php $db =  null;?>
 </body>
 </html>

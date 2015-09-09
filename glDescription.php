@@ -21,9 +21,8 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
     $bathRate = number_format($row['GLBathRate']);
     $boolGroom = $row['GLGroom'];
     $boolBath = $row['GLBath'];
-    $nailRate = $row['GLNailsRate'];
     $boolNail = $row['GLNailsID'];
-    $boolOther = $row['GLOthersID'];
+    
 }
 $db = null;
 ?>
@@ -35,10 +34,12 @@ $db = null;
                 <input type="text" hidden="" value="<?php echo $getGLSeq?>"name="GLSeq">
                 <div class="radio">    
                     <label class="radio-inline">
-                        <input type="radio"  name="optionsRadios" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush <input type="text" name="bbprice" size="3" maxlength="3" value="<?php echo $bathRate; ?>"> 
+                        <input type="radio"  name="optionsRadios" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush 
+                        <input type="text" name="bbprice" size="3" maxlength="3" value="<?php echo $bathRate; ?>"> 
                     </label>
                     <label class="radio-inline">
-                        <input type="radio"  name="optionsRadios" id="optionsRadios2" value="groom"<?php if($boolGroom=='-1'){echo "checked";}?>> Groom <input type="text" name="groomprice" size="3" maxlength="3" value="<?php echo $groomRate; ?>"> 
+                        <input type="radio"  name="optionsRadios" id="optionsRadios2" value="groom"<?php if($boolGroom=='-1'){echo "checked";}?>> Groom 
+                        <input type="text" name="groomprice" size="3" maxlength="3" value="<?php echo $groomRate; ?>"> 
                     </label>
                 </div>
                 <div class="checkbox">
