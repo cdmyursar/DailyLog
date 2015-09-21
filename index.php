@@ -13,13 +13,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST['userName'] == $loginSQL && $_POST['userPassword'] == $passwordSQL){
                 session_start();
                 $_SESSION['TakenBy']=$_POST['userName'];
-                header("location:/DailyLog.php");
+                header("location:/dailylog.php");
             }  
  
         }
         
 }
 include "/includes/header.php";
+$db = null;
 ?>
 <body>
    
@@ -27,7 +28,7 @@ include "/includes/header.php";
 
 <div class="container">
     <div class="row">
-        <div class="col-md-offset-5 col-md-3">
+        <div class="jumbotron">
             <div class="form-login">
                  <form role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <h4>Welcome back.</h4>

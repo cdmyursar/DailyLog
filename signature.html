@@ -1,0 +1,29 @@
+<div id="signature"></div>
+
+<script src="js/jSignature.min.js"></script>        	
+<script>
+    $(document).ready(function(){
+    var sigdiv = $("#signature").jSignature();
+    var str = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"0\" height=\"0\"></svg>";
+
+    svg = function(){
+        
+        var datapair = sigdiv.jSignature("getData", "svg");
+        $('#mySig').val(datapair[1]);
+        
+        if($('#mySig').val().length <= str.length){
+            alert("Please Sign Below");
+            return false;
+        }else{
+            
+            return true;
+        }
+    
+    };
+    });
+</script>
+    
+<textarea required="" name="signature" id="mySig" hidden=""></textarea>
+<button class="btn btn-info" type="button" onclick="$('#signature').jSignature('clear')">Clear</button>
+<button type="submit" onclick="return svg();" class="btn btn-default">Complete Check-In</button> 
+    

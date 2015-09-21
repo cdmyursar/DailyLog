@@ -1,45 +1,27 @@
 <?php
 session_start();
 $_SESSION['TakenBy'];
+
 include '/includes/header.php';
 include '/includes/connect.php';
 include '/includes/navbar.php'; 
-
-$getGLSeq = $_GET['GLSeq'];
-
-$sql = "SELECT GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
-    . "GroomingLog.GLGroom, GroomingLog.GLBath, "
-    . "GroomingLog.GLSignature, GroomingLog.GLDeshed, GroomingLog.GLFlea, GroomingLog.GLSkunk, "
-    . "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate "
-    . "FROM GroomingLog "
-    . "WHERE GLSeq=$getGLSeq";
-$result = $db->query($sql);
-
-while($row = $result->fetch(PDO::FETCH_ASSOC)){    
-    $description = $row['GLDescription'];
-    $groomRate = number_format($row['GLRate']);
-    $bathRate = number_format($row['GLBathRate']);
-    $boolGroom = $row['GLGroom'];
-    $boolBath = $row['GLBath'];
-    $boolNail = $row['GLNailsID'];
-    
-}
-$db = null;
+include '/includes/sescreate.php';
 ?>
 
 <body>  
     <div class="container">
         <div class="jumbotron">
             <form role="form" method="POST" action="/Finalize.php">
-                <input type="text" hidden="" value="<?php echo $getGLSeq?>"name="GLSeq">
+                <div class="">Dog Name: <?php echo "<b> ".$petName."</b>, ".$petBreed;?></div>
+                <div class="">Customer: <?php echo $custLName;?></div>
                 <div class="radio">    
                     <label class="radio-inline">
-                        <input type="radio"  name="optionsRadios" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush 
-                        <input type="text" name="bbprice" size="3" maxlength="3" value="<?php echo $bathRate; ?>"> 
+                        <input type="radio"  name="groomOption" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush 
+                        <input type="text" name="bbPrice" size="3" maxlength="3" value="<?php echo $bathRate; ?>"> 
                     </label>
                     <label class="radio-inline">
-                        <input type="radio"  name="optionsRadios" id="optionsRadios2" value="groom"<?php if($boolGroom=='-1'){echo "checked";}?>> Groom 
-                        <input type="text" name="groomprice" size="3" maxlength="3" value="<?php echo $groomRate; ?>"> 
+                        <input type="radio"  name="groomOption" id="optionsRadios2" value="groom"<?php if($boolGroom=='-1'){echo "checked";}?>> Groom 
+                        <input type="text" name="groomPrice" size="3" maxlength="3" value="<?php echo $groomRate; ?>"> 
                     </label>
                 </div>
                 <div class="checkbox">
@@ -88,30 +70,9 @@ $db = null;
                         <option  class="flea" value="FleaDip: $30.00">FleaDip: $30.00</option>
                     </select>
                 </div>
-<!--                <div class="btn-group spacer" role="group" >
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="10">10</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="7">7</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="5">5</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="5reverse">5 Rev</button>
-                </div>
-                </br>
-                <div class="btn-group" role="group" >
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="ALO">ALO</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="NTT">NtT</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="SCH">SCH</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="Cocker">Cocker</button>
-                </div>
-                </br>
-                <div class="btn-group" role="group" >
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="tbfcft">TB FC & FT</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="tbhd">TB HD</button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="SCH"></button>
-                    <button  class="btn btn-default" type="button" onclick="jsFunction();" name="Cocker">Cocker</button>
-                </div>-->
                 <textarea id="txtarea" name="txtarea1"><?php echo $description;?></textarea>
                 <input type="submit" value="save" class="btn btn-default" >
             </form>
-            
             <script src="/js/TxtAreaModify.js"></script>
         </div>
     </div>   
