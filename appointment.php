@@ -16,30 +16,31 @@ include '/includes/sescreate.php';
                 <div class="">Customer: <?php echo $custLName;?></div>
                 <div class="radio">    
                     <label class="radio-inline">
-                        <input type="radio"  name="groomOption" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush 
+                        <input type="radio" class="bigradio" name="groomOption" id="optionsRadios1" value="bb"<?php if($boolBath=='-1'){echo "checked";}?>> Bath and Brush 
                         <input type="text" name="bbPrice" size="3" maxlength="3" value="<?php echo $bathRate; ?>"> 
                     </label>
                     <label class="radio-inline">
-                        <input type="radio"  name="groomOption" id="optionsRadios2" value="groom"<?php if($boolGroom=='-1'){echo "checked";}?>> Groom 
+                        <input type="radio" class="bigradio" name="groomOption" id="optionsRadios2" value="groom"<?php if($boolGroom=='-1'){echo "checked";}?>> Groom 
                         <input type="text" name="groomPrice" size="3" maxlength="3" value="<?php echo $groomRate; ?>"> 
                     </label>
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="nailfile" onchange="nailFileSelect();" name="nailfile" value="Nail File: $10.00">Nail File
+                <div class="checkbox form-control">
+                    <label class="control-label">
+                        <input type="checkbox" class="bigchbx" id="nailfile" onchange="nailFileSelect();" name="nailfile" value="Nail File: $10.00">Nail File
                     </label>
-                    <label>
-                        <input type="checkbox" id="teethbrush" onchange="teethSelect();" name="teethbrush" value="Teeth Brush: $10.00">Teeth Brush
+                    <label class="control-label">
+                        <input type="checkbox" class="bigchbx " id="teethbrush" onchange="teethSelect();" name="teethbrush" value="Teeth Brush: $10.00">Teeth Brush
                     </label>                   
-                    <label>
-                        <input type="checkbox" id="dematt" onchange="demattSelect();"name="dematt" value="De-matt: $15.00">De-matt
+                    <label class="control-label">
+                        <input type="checkbox" class="bigchbx " id="dematt" onchange="demattSelect();"name="dematt" value="De-matt: $15.00">De-matt
                     </label>  
-                    <label>
-                        <input type="checkbox" id="deskunk" onchange="deskunkSelect();"name="deskunk" value="Deskunk: $30.00">Deskunk
-                    <label>
-                        <input type="checkbox" id="flea" onchange="fleaSelect();"name="flea" value="Flea Shampoo: $5.00">Flea Shampoo
+                    <label class="control-label">
+                        <input type="checkbox" class="bigchbx " id="deskunk" onchange="deskunkSelect();"name="deskunk" value="Deskunk: $30.00">Deskunk
+                    </label>
+                    <label class="control-label">
+                        <input type="checkbox" class="bigchbx " id="flea" onchange="fleaSelect();"name="flea" value="Flea Shampoo: $5.00">Flea Shampoo
                     </label> 
-                    </label> 
+                     
                 </div>
                 <div class="dropdown">
                     <select name="shampoo" onchange="shampooSelect();"class="form-control" >

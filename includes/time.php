@@ -1,15 +1,4 @@
-<style>
-.clockStyle {
-	background-color:transparent;
-	font-family:"Arial Black", Gadget, sans-serif;
-        font-size:45px;
-        font-weight:bold;
-	letter-spacing: 2px;
-        text-align: center;
-        width:100%;
-        color:white;
-}
-</style>
+
 <div id="clockDisplay" class="clockStyle centered"></div>
 <script>
 function renderTime() {
