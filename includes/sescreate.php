@@ -1,10 +1,10 @@
 <?php
-$getGLSeq = $_GET['GLSeq'];
+$getGLSeq = $_POST['GLSeq'];
 
 $sql = "SELECT GroomingLog.GLDescription, GroomingLog.GLRate, GroomingLog.GLBathRate, "
     . "GroomingLog.GLGroom, GroomingLog.GLBath, "
     . "GroomingLog.GLSignature, GroomingLog.GLDeshed, GroomingLog.GLFlea, GroomingLog.GLSkunk, "
-    . "GroomingLog.GLNailsID, GroomingLog.GLOthersID, GroomingLog.GLNailsRate, "
+    . "GroomingLog.GLGroomNails, GroomingLog.GLGroomOthers, GroomingLog.GLNailsRate, "
     . "GroomingLog.GLOthersRate, "
     . "GroomingLog.GLTerms, "
     . "Pets.PtPetName, Clients.CLFirstName, Clients.CLLastName, Breeds.BrBreed, "
@@ -24,7 +24,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
     $bathRate = number_format($row['GLBathRate']);
     $boolGroom = $row['GLGroom'];
     $boolBath = $row['GLBath'];
-    $boolNail = $row['GLNailsID'];
+    $boolNail = $row['GLGroomNails'];
     $petName = $row['PtPetName'];
     $custLName = $row['CLLastName'];
     $custFName = $row['CLFirstName'];
@@ -41,7 +41,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
     $deshed = $row['GLDeshed'];
     $fleaShampoo = $row['GLFlea'];
     $skunk = $row['GLSkunk'];
-    $boolOther = $row['GLOthersID'];
+    $boolOther = $row['GLGroomOthers'];
     $nailFileRate = $row['GLNailsRate'];
     $otherRate = $row['GLOthersRate'];
     $terms = $row['GLTerms'];

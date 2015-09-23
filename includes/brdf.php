@@ -2,40 +2,12 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $postDogID = $_POST["GLSeq"]; 
     $postTakenBy = $_POST['GLTakenBy'];
-    echo $postTakenBy;
-    echo $_SESSION['TakenBy'];
     $postRough = $_POST['GLR'];
     $postBath = $_POST['GLB'];
     $postDry = $_POST['GLD'];
     $postCompleted = $_POST['GLCompleted'];
     $postCheckInTime = $_POST['GLCheckInTime'];
-    
 
-    if(isset($_POST['Claim'])){
-        if($postCheckInTime == ""){
-            $sqlUpdateCheckInTime = "UPDATE GroomingLog "
-                                    . "SET GLCheckInTime=Now() "
-                                    . "WHERE GLSeq=".$postDogID."";
-            $db->query($sqlUpdateCheckInTime);
-        }
-        if($postTakenBy == $_SESSION['TakenBy']){
-            $sqlUpdate = "UPDATE GroomingLog "
-                        ."SET GLTakenBy='' "
-                        ."WHERE GLSeq=".$postDogID."";
-            $db->query($sqlUpdate);    
-        }else if($postTakenBy === ''){
-            $sqlUpdate = "UPDATE GroomingLog "
-                        ."SET GLTakenBy='".$_SESSION['TakenBy']."' "
-                        ."WHERE GLSeq=".$postDogID."";
-            $db->query($sqlUpdate);  
-        }else if($postTakenBy != $_SESSION['TakenBy']){
-        ?>
-        <script>
-        alert("Can't claim a dog already claimed!");
-        </script>
-            <?php
-        }
-    }
     if(isset($_POST['Rough'])){
         // echo "Rough";
          if($postRough == "0" || ""){

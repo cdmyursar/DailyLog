@@ -13,6 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST['userName'] == $loginSQL && $_POST['userPassword'] == $passwordSQL){
                 session_start();
                 $_SESSION['TakenBy']=$_POST['userName'];
+                $db = null;
                 header("location:/dailylog.php");
             }  
  

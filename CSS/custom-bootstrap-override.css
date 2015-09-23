@@ -7,6 +7,15 @@ and open the template in the editor.
     Created on : Apr 5, 2015, 8:18:10 PM
     Author     : KC
 */
+.breedcolor{
+    color: dodgerblue;
+}
+.sigBorder{
+    border-style: solid;
+    border-color: #3399FF;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
 
 .clockStyle {
 	background-color:transparent;

@@ -5,7 +5,7 @@ $_SESSION['result'];
 
 include '/includes/connect.php';
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){  
     $takenBy = $_SESSION['TakenBy'];
     $glSeq = $_SESSION['result']['glSeq'];
     $clSeq = $_SESSION['result']['clSeq'];
@@ -60,21 +60,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $_SESSION['result']['signature']=$_POST['signature'];
     $signature = $_SESSION['result']['signature'];
-    //echo $signature;
-    //
-    //var_dump($_SESSION['result']);
-
-    $sql = "UPDATE GroomingLog "
-            //. "SET GroomingLog.GLDescription = '$description' WHERE GroomingLog.GLSeq = $glSeq";
+  
+     $sql = "UPDATE GroomingLog "
             . "SET "
             . "GLGroom = $boolGroom, GLBath = $boolBath, "
-            . "GLDescription = '$description', "
+            . "GLDescription = '$description',GLCheckInTime = NOW(), "
             . "GLRate = $groomRate, GLBathRate = $bathRate, "
             . "GLNailsRate = $nailFileRate, GLOthersRate = $otherRate, "
-            . "GLNailsID = $boolNail, GLOthersID = $boolOther, "
+            . "GLGroomNails = $boolNail, GLGroomOthers = $boolOther, "
             . "GLSignature = '$signature', GLTerms = '$terms', "
             . "GLTakenBy='$takenBy' "
             . "WHERE GLSeq = $glSeq";
+     //sql statement stopped working... If fucked it up
+//    $sql = "UPDATE GroomingLog "
+//            //. "SET GroomingLog.GLDescription = '$description' WHERE GroomingLog.GLSeq = $glSeq";
+//            . "SET "
+//            . "GLGroom = $boolGroom, GLBath = $boolBath, "
+//            . "GLDescription = $description, GLCheckInTime = NOW(), "
+//            . "GLRate = $groomRate, GLBathRate = $bathRate, "
+//            . "GLNailsRate = $nailFileRate, GLOthersRate = $otherRate, "
+//            . "GLGroomNails = $boolNail, GLGroomOthers = $boolOther, "
+//            . "GLSignature = '$signature', GLTerms = '$terms', "
+//            . "GLTakenBy='$takenBy' "
+//            . "WHERE GLSeq = $glSeq";
     $db->query($sql);
     $sql = "UPDATE Clients "
             . "SET "
@@ -90,8 +98,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             . "WHERE PtSeq = $petID";
     $db->query($sql);
     $db=null;
-    unset($_SESSION['result']);
     
-    header("location:/dailylog.php");
+  header("location:/dailylog.php");  
 }
+
 ?>

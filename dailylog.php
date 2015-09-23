@@ -1,10 +1,13 @@
 <?php
 session_start();
 $_SESSION['TakenBy'];
+if(isset($_SESSION['result'])){
+    unset($_SESSION['result']);
+}
 include '/includes/header.php';
 include '/includes/connect.php';
-include '/includes/brdf.php';
 include '/includes/navbar.php'; 
+include '/includes/brdf.php';
 ?>
 
 <body>
@@ -34,6 +37,7 @@ $result = $db->query($sql);
 ?>
 <table id="idTable" class="table table-striped table-bordered">        
 <?php
+
 while ($row = $result->fetch(PDO::FETCH_ASSOC)){
     $seq= $row['GLSeq'];
     $timeGL = $row['GLInTime'];  
@@ -48,8 +52,22 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)){
         $newFormat="--";
     }
 ?>
-
+     
     <tr class="<?php echo $row['GLTakenBy'];if($row['GLGroom']== $row['GLBath']){echo " danger";}else if($row['GLGroom']=="-1"){echo" success";}else if($row['GLBath']=="-1"){echo" info";}?>">
+    <td>
+        <form role="form" action="/appointment.php" method="POST">
+        <input type="text" hidden=""value="<?php echo $row['GLSeq'] ?>"name="GLSeq">
+        <button type="submit" name="checkinOrModify"class="btn btn-default"><?php if($row['GLTakenBy']!=''){echo $row['GLTakenBy'];}else{echo "Check-In";}?></button>
+        </form>
+    </td>
+    <td>
+        <span class="table-font-norm"><?php echo $notMil;?></span></br>
+        <?php echo $newFormat;?>
+    </td>
+    <td>
+        <span class="table-color2"><?php echo $row['PtPetName'];?></span><?php echo ", ".$row['CLLastName'];?></br>
+        <span class="breedcolor"><?php echo $row['BrBreed'];?></span>
+    </td>
     <td>
         <form role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <input type="text" hidden=""value="<?php echo $row['GLSeq'] ?>"name="GLSeq">
@@ -59,26 +77,6 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)){
         <input type="text" hidden=""value="<?php echo $row['GLB'] ?>"name="GLB">
         <input type="text" hidden=""value="<?php echo $row['GLD'] ?>"name="GLD">         
         <input type="text" hidden=""value="<?php echo $row['GLCheckInTime'] ?>"name="GLCheckInTime">
-        <button type="submit" name="Claim"class="btn btn-default"><?php if($row['GLTakenBy']!=""){echo $row['GLTakenBy'];}else{echo "Claim";}?></button>
-        
-    </td>
-    <td>
-        <span class="table-font-norm"><?php echo $notMil;?></span></br>
-        <?php echo $newFormat;?>
-    </td>
-    <td>
-        <span class="table-color2"><?php echo $row['PtPetName'];?></span></br>
-        <?php echo $row['BrBreed'];?>
-    </td>
-    <td>
-        
-        <?php echo $row['CLLastName'];?></br>
-        <a class="href-button" href=<?php echo"/appointment.php/?GLSeq=".$seq.""  ?>>Description</a>
-    </td>
-    <td>
-        <?php echo "10:00 A.M."; ?>
-    </td>
-    <td>
         <div class="btn-group" role="group" >
             <button type="submit" class="btn btn-default <?php if($row['GLR']!=0){ echo"btn-success";}?>" name="Rough">Rough</button>
             <button type="submit" class="btn btn-default <?php if($row['GLB']!=0){ echo"btn btn-info";}?>" name="Bath">Bath</button>
@@ -87,11 +85,15 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)){
             <button type="submit" class="btn btn-default <?php if($row['GLD']!=0){ echo"btn btn-warning";}?>" name="Dry">Dry</button>
             <button type="submit" class="btn btn-default <?php if($row['GLCompleted']!=0){ echo"btn btn-danger";}?>" name="Finished">Finished</button>
         </div>  
+        </form>
     </td>
-</form>
 </tr>
 
-<?php } ?>
+
+<?php 
+} 
+$db=null;
+?>
     
 </table>
 <script>

@@ -7,15 +7,15 @@ include '/includes/header.php';
 include '/includes/connect.php';
 include '/includes/navbar.php'; 
 include '/includes/posttest.php';
+//var_dump($_SESSION['result']);
+
 ?> 
 <body>
     <div class="container">
         <div class="jumbotron">
             <form role="form" class="form-vertical" method="POST" action="/complete.php">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Customer Information
-                        <!--<button class="btn btn-default btn-xs" onclick="editFields();" style="float:right;"type="button">Edit</button>-->
-                    </div>
+                    <div class="panel-heading">Customer Information</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-6">
@@ -27,10 +27,12 @@ include '/includes/posttest.php';
                                     <label>Breed:</label>
                                     <input type="text" name="breed" disabled="" class="form-control" value="<?php echo $_SESSION['result']['petBread'];?>">
                                 </div>
+                                <div class="form-group">
                                     <label class="control-label">Address:</label>
                                     <input type="text" name="address" class="form-control" required="TRUE" placeholder="Address"value="<?php echo $_SESSION['result']["address"];?>">
                                     <input type="text" name="city" class="form-control" required="TRUE" placeholder="City"value="<?php echo $_SESSION['result']["city"];?>">    
-                                <div class="row">
+                                </div>
+                                <div class="row form-group">
                                     <div class="col-sm-6">
                                         <input type="text" name="state" class="form-control" maxlength="2"placeholder="State"value="<?php echo $_SESSION['result']["state"];?>">
                                     </div>
@@ -63,7 +65,6 @@ include '/includes/posttest.php';
                         </div>
                     </div>
                 </div>
-        
                 <div class="panel panel-default panel-info">
                     <div class="panel-heading">Grooming Instructions</div>
                     <div class="panel-body">
@@ -76,27 +77,29 @@ include '/includes/posttest.php';
                             echo "<p>";
                                 for($i = 0; $i<count($spliceTxtArea); $i++){
                                     echo $spliceTxtArea[$i]."<br/>";
-                        }
-                        echo "</p>";
+                                }
+                            echo "</p>";
                         ?>
                     </div>
                 </div>
                 <div class="panel panel-default panel-danger">
                     <div class="panel-heading">Customer Agreement</div>
-                    <div class="panel-body">
-                        <?PHP include '\contract.html';?>
-                    </div>
-                    <div class="bg-danger" style="padding: 10px;">
-                        <input type="checkbox" required="TRUE" name="chbxagree" value="I AGREED TO TERMS" id="chbxagree">
-                        <p id="labelagree">I agree to customer agreement.</p>
-                    </div>
+                        <div class="panel-body"><?PHP include '\contract.html';?></div>
+                        <div class="bg-danger" style="padding: 10px;">
+                            <input type="checkbox" required="TRUE" name="chbxagree" value="I AGREED TO TERMS" id="chbxagree">
+                            <p id="labelagree">I agree to customer agreement.</p>
+                        </div>
                 </div>
-                <?php include '\signature.html';?>
+                <div class="sigBorder">
+                    <?php include '\signature.html';?>
+                </div>
+                <textarea required="" name="signature" id="mySig" hidden=""></textarea>
+                <button class="btn btn-info" type="button" onclick="$('#signature').jSignature('clear')">Clear</button>
+                <button type="submit" onclick="return svg();" class="btn btn-default">Complete Check-In</button> 
             </form>
         </div>    
     </div>
 <?php $db =  null;?>
-
 <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
 <script>$(document).ready(function(){
         jQuery(function(phoneFormat){
