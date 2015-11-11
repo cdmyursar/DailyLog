@@ -7,7 +7,7 @@ include '/includes/header.php';
 include '/includes/connect.php';
 include '/includes/navbar.php'; 
 include '/includes/posttest.php';
-//var_dump($_SESSION['result']);
+
 
 ?> 
 <body>
@@ -28,21 +28,6 @@ include '/includes/posttest.php';
                                     <input type="text" name="breed" disabled="" class="form-control" value="<?php echo $_SESSION['result']['petBread'];?>">
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Address:</label>
-                                    <input type="text" name="address" class="form-control" required="TRUE" placeholder="Address"value="<?php echo $_SESSION['result']["address"];?>">
-                                    <input type="text" name="city" class="form-control" required="TRUE" placeholder="City"value="<?php echo $_SESSION['result']["city"];?>">    
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-sm-6">
-                                        <input type="text" name="state" class="form-control" maxlength="2"placeholder="State"value="<?php echo $_SESSION['result']["state"];?>">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text"  name="zip" class="form-control" required="TRUE" placeholder="Zipcode"value="<?php echo $_SESSION['result']["zip"];?>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
                                     <label>First Name:</label>
                                     <input type="text" required="" name="firstName" required="TRUE" class="form-control" value="<?php echo $_SESSION['result']['custFName'];?>">
                                 </div>
@@ -50,6 +35,10 @@ include '/includes/posttest.php';
                                     <label>Last Name:</label>
                                     <input type="text" required="" name="lastName" required="TRUE" class="form-control" value="<?php echo $_SESSION['result']['custLName'];?>">
                                 </div>
+                               
+                            </div>
+                            <div class="col-xs-6">
+                                
                                 <div class="form-group">
                                     <label>Phone Numbers:</label>
                                     <input type="text" name="phone1" placeholder="phone number" required="TRUE" class="form-control phoneNum" value="<?php echo $_SESSION['result']['phone1'];?>">
@@ -84,13 +73,17 @@ include '/includes/posttest.php';
                 </div>
                 <div class="panel panel-default panel-danger">
                     <div class="panel-heading">Customer Agreement</div>
-                        <div class="panel-body"><?PHP include '\contract.html';?></div>
+                        <div class="panel-body">
+                            <button id="btnagreement" type="button" class="btn btn-info">Read Agreement</button>
+                                <div id="agreement">
+                                    <?PHP include '\contract.html';?>
+                                </div>
+                        </div>
                         <div class="bg-danger" style="padding: 10px;">
-                            <input type="checkbox" required="TRUE" name="chbxagree" value="I AGREED TO TERMS" id="chbxagree">
                             <p id="labelagree">I agree to customer agreement.</p>
                         </div>
                 </div>
-                <div class="sigBorder">
+                <div class="sigBorder">                   
                     <?php include '\signature.html';?>
                 </div>
                 <textarea required="" name="signature" id="mySig" hidden=""></textarea>
@@ -106,6 +99,13 @@ include '/includes/posttest.php';
             $(".phoneNum").mask("(999)999-9999");
 });
 });
+
+$(document).ready(function(){
+    $("#btnagreement").click(function(){
+        $("#agreement").toggle();
+    });
+});
+
 </script>
 </body>
 </html>

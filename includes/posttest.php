@@ -10,13 +10,13 @@ $nailRate=0;
 //test if POST variables were set, runs 1 time on page load.
 if(isset($_POST['groomOption'])){
     if($_POST['groomOption'] == 'bb'){
-    echo "Bath OPtion ";
+    //echo "Bath OPtion ";
     $_SESSION['result']['boolBath'] = -1;
     $_SESSION['result']['boolgroom'] = 0;
     $_SESSION['result']['bathRate'] = $_POST['bbPrice'];
     }
     if($_POST['groomOption'] == 'groom'){
-    echo " ".$_POST['groomOption'];
+    //echo " ".$_POST['groomOption'];
     $_SESSION['result']['boolgroom'] = -1;
     $_SESSION['result']['boolBath'] = 0;
     $_SESSION['result']['groomRate'] = $_POST['groomPrice'];
@@ -24,20 +24,20 @@ if(isset($_POST['groomOption'])){
     
 }
 if(isset($_POST['nailfile'])){
-    echo "nail File ";
+    //echo "nail File ";
     $nailFileRate =10;
     $_SESSION['result']['boolNail']=-1;
     $_SESSION['result']['nailFileRate']=$nailFileRate;
 }
 if(!isset($_POST['nailfile'])){
-    echo "nail File ";
+    //echo "nail File ";
     $nailFileRate =0;
     $_SESSION['result']['boolNail']=0;
     $_SESSION['result']['nailFileRate']=$nailFileRate;
 }
 
  if(isset($_POST['teethbrush'])){
-     echo "teeth";
+    //echo "teeth";
     $otherRate +=10;
     $_SESSION['result']['boolOthers']=-1;
     $_SESSION['result']['otherRate'] = $otherRate;

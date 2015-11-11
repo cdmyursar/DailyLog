@@ -4,9 +4,17 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Apr 5, 2015, 8:18:10 PM
+    Createbackd on : Apr 5, 2015, 8:18:10 PM
     Author     : KC
 */
+//.table-white{
+  //  background-color: white;
+    
+//}
+
+#agreement{
+    display:none;
+}
 .breedcolor{
     color: dodgerblue;
 }
@@ -25,7 +33,12 @@ and open the template in the editor.
 	letter-spacing: 2px;
         text-align: center;
         width:100%;
-        color:white;
+        color:black;
+}
+.dailyview{
+	color:black;
+        font-size:100px;
+      
 }
 
 #labelagree{
@@ -202,10 +215,11 @@ background-color: rgba(0, 152, 195, 1);
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400);
 body {
-  background-color:#fff;
+  background-color: #D6D6C2;
   -webkit-font-smoothing: antialiased;
   font: normal 14px Roboto,arial,sans-serif;
-  background-image: url('/img/Elegant_Background-12.jpg');
+  background-image: url('/img/gplaypattern.png');
+  
 }
 
 

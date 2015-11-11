@@ -1,0 +1,59 @@
+<?php
+
+$sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom, GroomingLog.GLBath, GroomingLog.GLCompleted, GroomingLog.GLSeq, GroomingLog.GLInTime, Pets.PtPetName, Clients.CLLastName, Breeds.BrBreed, GroomingLog.GLCheckInTime, GroomingLog.GLR, GroomingLog.GLB, GroomingLog.GLD, GroomingLog.GLF
+    FROM (Clients INNER JOIN (Pets LEFT JOIN GroomingLog ON Pets.[PtSeq] = GroomingLog.[GLPetID]) ON Clients.CLSeq = Pets.PtOwnerCode) INNER JOIN Breeds ON Pets.PtBreedID = Breeds.BrSeq
+    WHERE (((GroomingLog.GLDate)=Date()))
+    ORDER BY GroomingLog.GLInTime";
+    $result = $db->query($sql);
+        
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+        $timeGL = $row['GLInTime'];  
+        $checkinTimeNotMil = $row['GLCheckInTime'];
+        $newTimeGL = str_replace("1899-12-30"," ",$timeGL);
+        $notMil = ( date("g:i a", strtotime($newTimeGL)) );
+    
+    
+    
+    
+    <tr class="success"> 
+    <td >
+        <h1><?php echo $notMil;?></h1>
+    </td>    
+    <td>
+        <span class="table-color2"><h3><?php echo $row['PtPetName'];?></span><?php echo ", ".$row['CLLastName'];?></h3>
+        <span class="breedcolor"><h3><?php echo $row['BrBreed'];?></h3></span>
+    </td>
+    <td><h1>
+        <?php 
+            if($row['GLGroom']&&$row['GLBath']==-1){echo "Not Selected";}
+                else if($row['GLGroom']==-1){echo "Groom";}
+                    else {echo "Bath & Brush";}
+        ?>
+    </h1></td>
+    <?php 
+        if($row['GLR']!=0){
+            echo "<td class=\"success\">"
+            . "<h1>R</h1>"
+            . "</td>";    
+        }
+        if($row['GLB']!=0){
+            echo "<td class=\"success\">"
+            . "<h1>B</h1>"
+            . "</td>";    
+        }
+        if($row['GLD']!=0){
+            echo "<td class=\"success\">"
+            . "<h1>D</h1>"
+            . "</td>";    
+        }
+        if($row['GLCompleted']!=0){
+            echo "<td class=\"success\">"
+            . "<h1>F</h1>"
+            . "</td>";    
+        }
+    ?>
+        </tr>
+
+} 
+$db=null;
+?>
