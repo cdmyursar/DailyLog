@@ -1,31 +1,23 @@
 <?php
 include '/includes/header.php';
 include '/includes/connect.php';
-include '/includes/brdf.php';
 ?>
 
-<body>
+<body onload="ajaxCallPHP()">
 <div class="container">
     <?php 
         include '/includes/timeBig.php';
-        date_default_timezone_set('America/Denver');
+        date_default_timezone_set('America/Chicago');
     ?>
     
-<div class="table-responsive">
-<table class="table">
-<thead>
-    <tr class="warning">
-        <th><h3 class="text-center">Appointment Time</h3></th>
-        <th><h3 class="text-center">Dog - Customer</h3></th>
-        <th><h3 class="text-center">B&B or Groom</h3></th>
-    </tr>
-</thead>
-<tbody id="ajaxcalls">
-</tbody>
-</table>
-</div>
+    <div id="ajaxcalls" class="row box-shadow--16dp">
+    </div>
+       
+
+
     <script>
-        setInterval("ajaxCallPHP()", 5000);
+        //setInterval("ajaxCallPHP()", 5000);
+        
         var ajaxCallPHP = function(){
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function(){
@@ -35,8 +27,9 @@ include '/includes/brdf.php';
             };
             xmlhttp.open("POST", "includes/ajax_dailyview.php", true);
             xmlhttp.send();
-        }
+        };
     </script>
+    
 </body>
 </html>
 
