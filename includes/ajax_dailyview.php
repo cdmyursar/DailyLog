@@ -2,8 +2,8 @@
 include 'connect.php';
 
 $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom, 
-    GroomingLog.GLBath, GroomingLog.GLCompleted, GroomingLog.GLSeq, 
-    GroomingLog.GLInTime, GroomingLog.GLCageNumber, 
+    GroomingLog.GLBath, GroomingLog.GLCompleted, GroomingLog.GLSeq, GroomingLog.GLCheckOut, 
+    GroomingLog.GLInTime, GroomingLog.GLCageNumber, GroomingLog.GLCheckIn, 
     GroomingLog.GLR, GroomingLog.GLB, GroomingLog.GLD, GroomingLog.GLF,
     Pets.PtPetName, 
     Clients.CLLastName, Breeds.BrBreed, GroomingLog.GLCheckInTime
@@ -15,29 +15,40 @@ $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom,
     date_default_timezone_set('America/Chicago');
     
     while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+        $boolCheckIn = $row['GLCheckIn'];
+        $checkOut = $row['GLCheckOut'];
         $timeGL = $row['GLInTime'];  
         $checkinTimeNotMil = $row['GLCheckInTime'];
         $newTimeGL = str_replace("1899-12-30"," ",$timeGL);
-        $notMil = ( date("g:i a", strtotime($newTimeGL)) );
+        $notMil = ( date("g:i", strtotime($newTimeGL)) );
         
-        $timecompare = date("g:i", strtotime($newTimeGL));
-        $timeplus0 = strtotime($timecompare);
-        $timeplus1 = strtotime($timecompare) +3600;
-        $timeplus2 = strtotime($timecompare) +7200;
-        $timeplus3 = strtotime($timecompare) +10800;
+        $timecompare = date("H:i", strtotime($newTimeGL));
+        $timepluszero = strtotime($timecompare);
+        $timeplusone = strtotime($timecompare) +3600;
+        $timeplustwo = strtotime($timecompare) +7200;
+        $timeplusthree = strtotime($timecompare) +10800;
         
-        $currentTime = date('h:i');
+        $timeplus0 = date('H:i',$timepluszero);
+        $timeplus1 = date('H:i',$timeplusone);
+        $timeplus2 = date('H:i',$timeplustwo);
+        $timeplus3 = date('H:i',$timeplusthree);
         
-        if($currentTime > date('h:i',$timeplus3)){
+        $currentTime = date('H:m');
+        $backgroundColor = "zerohour";
+        
+        if($boolCheckIn == -1){
+        if($currentTime > $timeplus3){
             $backgroundColor = "fourhour";
-        }else if($currentTime>date('h:i',$timeplus2)){
+        }else if($currentTime>$timeplus2){
             $backgroundColor = "threehour";
-        }else if($currentTime>date('h:i',$timeplus1)){
+        }else if($currentTime>$timeplus1){
             $backgroundColor = "twohour";
-        }else if($currentTime>date('h:i',$timeplus0)){
+        }else if($currentTime>$timeplus0){
             $backgroundColor = "onehour";
         } else {
             $backgroundColor = "zerohour";
+        }}else{
+            $backgroundColor = "notCheckIn";
         }
        
         $progressBarStatus = 1;
@@ -52,6 +63,9 @@ $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom,
         }else{
             $progressBarStatus = 1;
         }
+        
+//        if($checkOut != -1)
+//        {
 ?>
 
 <div class="col-md-12">
@@ -84,6 +98,7 @@ $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom,
 </div>
     
 <?php
+//        }
 } 
 $db=null;
 $result = null;
