@@ -16,7 +16,7 @@ include '/includes/connect.php';
 
 
     <script>
-        //setInterval("ajaxCallPHP()", 5000);
+        setInterval("ajaxCallPHP()", 5000);
         
         var ajaxCallPHP = function(){
             var xmlhttp = new XMLHttpRequest();

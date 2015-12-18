@@ -64,27 +64,34 @@ $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom,
             $progressBarStatus = 1;
         }
         
-//        if($checkOut != -1)
-//        {
+        if($checkOut != -1)
+        {
+
 ?>
 
 <div class="col-md-12">
     <div class="col-md-1 cageNumber">
         <h1>3</h1>
     </div>
-    <div class="col-md-5 dailyListDefault <?php echo $backgroundColor;?> border-top">
-        <h1><?php echo $row['PtPetName']; echo ", "; echo $row['BrBreed'];?></h1>
+    <div class="col-md-1 dailyListDefault <?php echo $backgroundColor;?> border-top">
+        <h1><?PHP if($row['GLTakenBy']!= ""){echo $row['GLTakenBy'];}else{echo "---";}?></h1>
     </div>
     <div class="col-md-3 dailyListDefault <?php echo $backgroundColor;?> border-top">
-        <h1><?php echo $row['CLLastName'];?></h1>
+        <h1><?php echo $row['PtPetName'];?></h1>
+    </div>
+    <div class="col-md-2 dailyListDefault <?php echo $backgroundColor;?> border-top">
+        <h1><?php echo substr($row['BrBreed'],0,9);?></h1>
+    </div>
+    <div class="col-md-2 dailyListDefault <?php echo $backgroundColor;?> border-top">
+        <h1><?php echo substr($row['CLLastName'],0,9);?></h1>
     </div>
     <div class="col-md-2 dailyListDefault <?php echo $backgroundColor;?> border-top">
         <h1><?php echo $notMil; ?></h1>
     </div>
     <div class="col-md-1 dailyListDefault <?php echo $backgroundColor;?> radius-right border-top-and-right">
             <h1><?php if($row['GLGroom']== -1)
-                {echo "Grm";}
-                else{echo "B&B";} ?></h1>
+                {echo "Gr";}
+                else{echo "BB";} ?></h1>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -100,6 +107,7 @@ $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom,
 <?php
 //        }
 } 
+    }
 $db=null;
 $result = null;
 ?>

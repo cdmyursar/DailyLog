@@ -9,16 +9,33 @@ var selFlea = document.getElementsByClassName("flea");
 var txtarea = document.getElementById("txtarea").innerHTML;  
 var parsTxtArea = txtarea.split("\n");
 var checkAddons = txtarea.indexOf("--ADDONS--");
+//var checkBody = txtarea.indexOf("--BODY:");
+//var checkHead = txtarea.indexOf("--HEAD:");
+//var checkFeet = txtarea.indexOf("--FEET:");
+//var checkTail = txtarea.indexOf("--TAIL:");
 var checkInstructions = txtarea.indexOf("--INSTRUCTIONS--");
 
-//
-//check txtarea for "addons" if not found, add it
-//if(checkInstructions == "-1"){
-//    document.getElementById("txtarea").innerHTML +="\n\n--INSTRUCTIONS--";             
+//check for "body" if not found add it
+//if(checkBody == "-1"){
+//    document.getElementById("txtarea").innerHTML +="\n--BODY:";             
 //}
+//check for "head" if not found add it
+//if(checkHead == "-1"){
+//    document.getElementById("txtarea").innerHTML +="\n--HEAD:";             
+//}
+//check for "feet" if not found add it
+//if(checkFeet == "-1"){
+//    document.getElementById("txtarea").innerHTML +="\n--FEET:";             
+//}
+//check for "tail" if not found add it
+//if(checkTail == "-1"){
+//    document.getElementById("txtarea").innerHTML +="\n--TAIL:";             
+//}
+//check txtarea for "addons" if not found, add it
 if(checkAddons == "-1"){
     document.getElementById("txtarea").innerHTML +="\n\n--ADDONS--";             
 }
+
 
 //parse textarea for any addons listed, set checkboxs or selectors to 
 //proper state, example checkboxs checked or not, options selected on correct value

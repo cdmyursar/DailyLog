@@ -121,6 +121,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
 }
 
 .dailyListDefault{    
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
 }
