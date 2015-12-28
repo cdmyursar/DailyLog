@@ -1,21 +1,21 @@
 <?php
 session_start();
 $_SESSION['TakenBy'];
+$takenBy = $_SESSION['TakenBy'];
 include '/includes/header.php';
-
 include '/includes/navbar.php';
 include '/includes/sqldashboard.php';
+include '/includes/connect2.php';
 ?>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
+
+
 
 <body>
     <div class="container-fluid">
         <div class="jumbotron">
             <p>Start Date: <input type="text" size="6" id="datepicker"></p>
             <p>End Date: <input type="text" size="6" id="datepicker2"></p>
+            
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -33,28 +33,35 @@ include '/includes/sqldashboard.php';
                     </thead>
                     <tbody>
                     <?PHP
-                    include '/includes/connect2.php';
+                    
                     
                     $weekRange = rangeWeek('2015-12-23');
                     //Correct date string, put year at end of string for proper format
                     //of access date sql access likes m-d-Y php likes Y-m-d
                     $startCorrect = date("m-d-Y", strtotime($weekRange['start']));
                     $endCorrect = date("m-d-Y", strtotime($weekRange['end']));
-                    echo $startCorrect;
-                    echo $endCorrect;
+//                    echo $startCorrect;
+//                    echo $endCorrect;
                     
-$sql = "SELECT Clients.CLLastName, GroomingLog.GLDate, GroomingLog.GLGroom, "
-    . "GroomingLog.GLBath, GroomingLog.GLRate, GroomingLog.GLGroomNails, "
-    . "GroomingLog.GLGroomOthers, GroomingLog.GLTakenBy, GroomingLog.GLBathRate, "
-    . "GroomingLog.GLNailsRate, GroomingLog.GLOthersRate, Transactions.Tips, Pets.PtPetName "
-    . "FROM Transactions INNER JOIN ((Clients INNER JOIN Pets ON Clients.[CLSeq] = Pets.[PtOwnerCode]) INNER JOIN GroomingLog ON Pets.[PtSeq] = GroomingLog.[GLPetID]) ON Transactions.[ID] = GroomingLog.[GLSeq] "
-    . "WHERE GLDate=#12-20-2015#";
-                    echo $sql;
+                    $sql = "SELECT Clients.CLLastName, GroomingLog.GLDate, GroomingLog.GLGroom, "
+                        . "GroomingLog.GLBath, GroomingLog.GLRate, GroomingLog.GLGroomNails, "
+                        . "GroomingLog.GLGroomOthers, GroomingLog.GLTakenBy, GroomingLog.GLBathRate, "
+                        . "GroomingLog.GLNailsRate, GroomingLog.GLOthersRate, Transactions.Tips, Pets.PtPetName "
+                        . "FROM ((Clients INNER JOIN Pets ON Clients.[CLSeq] = Pets.[PtOwnerCode]) INNER JOIN GroomingLog ON Pets.[PtSeq] = GroomingLog.[GLPetID]) INNER JOIN Transactions ON GroomingLog.GLSeq = Transactions.GLSeq "
+                        . "WHERE GLDate between #$startCorrect# and #$endCorrect# and GLTakenBy='$takenBy' "
+                        . "ORDER BY GLDate DESC";
+                    
                     $result = $db->query($sql);
-                    var_dump($result);
+                    
                     $count = 0;
+                    $bathDogs = 0;
+                    $groomDogs = 0;
+                    $nailDogs = 0;
+                    $otherDogs = 0;
+                    $groomingTotal = 0;
+                    $tipTotal = 0;
+                    $commissionTotal = 0;
                     while($row = $result->fetch(PDO::FETCH_ASSOC)){ 
-                        $count++;
                         $groomDate = $row['GLDate'];
                         $fixGroomDate = date('Y-m-d', strtotime($groomDate));
                         $custName = $row['CLLastName'];
@@ -68,17 +75,36 @@ $sql = "SELECT Clients.CLLastName, GroomingLog.GLDate, GroomingLog.GLGroom, "
                         $nailRate = $row['GLNailsRate']/2;
                         $otherRate = $row['GLOthersRate']/2;
                         $tip = $row['Tips'];
+                        $boolNails = $row['GLGroomNails'];
+                        $boolOther = $row['GLGroomOthers'];
+                                                
+                        $count++;
                         
+                        if($boolNails == -1){
+                            $nailDogs++;
+                            $groomingTotal += $nailRate/2;
+                        }
+                        if($boolOther == -1){
+                            $otherDogs++;
+                            $groomingTotal += $otherRate/2;
+                        }
                         
                         if($boolBath == -1 && $boolGroom == 0 ){
                             $cellChoice = "Bath";
                             $cellPrice = number_format($bathRate)/2;
+                            $groomingTotal += $bathRate/2;
+                            $bathDogs++;
                         }else if($boolBath == 0 && $boolGroom == -1){
                             $cellChoice = "Groom";
                             $cellPrice = number_format($groomRate)/2;
+                            $groomingTotal += $groomRate/2;
+                            $groomDogs++;
                         }else {
                             $cellChoice = "Not Defined";
                             $cellPrice = "NA";
+                        }
+                        if($tip != "" || $tip != null){
+                            $tipTotal += $tip;
                         }
                         
                         echo "<tr>";
@@ -97,16 +123,29 @@ $sql = "SELECT Clients.CLLastName, GroomingLog.GLDate, GroomingLog.GLGroom, "
                     ?>
                     </tbody>
                 </table>
+                <input type="text" value="<?PHP echo $groomDogs;?>">
+                <input type="text" value="<?PHP echo $bathDogs;?>">
+                <input type="text" value="<?PHP echo $nailDogs;?>">
+                <input type="text" value="<?PHP echo $otherDogs;?>">
+                <input type="text" value="<?PHP echo $groomingTotal;?>">
+                <input type="text" value="<?PHP echo $tipTotal;?>">
+                <input type="text" value="<?PHP echo $commissionTotal = $groomingTotal + $tipTotal;?>">
+                
             </div>
         </div>
     </div>  
-     <script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  $(function() {
-    $( "#datepicker2" ).datepicker();
-  });
-  </script>
+    
+    <?PHP ?>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $(function() {
+        $( "#datepicker" ).datepicker();
+        });
+        $(function() {
+        $( "#datepicker2" ).datepicker();
+        });
+    </script>
 </body>
 </html>
