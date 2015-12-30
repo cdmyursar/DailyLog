@@ -11,6 +11,14 @@ and open the template in the editor.
   //  background-color: white;
 //positioning of pointers from site, are 0 and 1 from white to color, mid is 56 percent and end is 99 to 100 from color to black.    
 //}
+
+
+
+.textContainer h2 {
+    vertical-align: middle;
+    
+}
+
 .notCheckIn{
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eeeeee+0,cccccc+100;Gren+3D */
 background: #eeeeee; /* Old browsers */
