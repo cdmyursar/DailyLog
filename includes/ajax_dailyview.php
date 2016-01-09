@@ -71,27 +71,27 @@ $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom,
 
 <div class="col-md-12">
     <div class="col-md-1 cageNumber">
-        <h1>3</h1>
+        <h2><b><?php echo $tagNumber; $tagNumber++; ?></b></h2>
     </div>
     <div class="col-md-1 dailyListDefault <?php echo $backgroundColor;?> border-top">
-        <h1><?PHP if($row['GLTakenBy']!= ""){echo $row['GLTakenBy'];}else{echo "---";}?></h1>
+        <h2><b><?PHP if($row['GLTakenBy']!= ""){echo $row['GLTakenBy'];}else{echo "---";}?>10</b></h2>
     </div>
     <div class="col-md-3 dailyListDefault <?php echo $backgroundColor;?> border-top">
-        <h1><?php echo $row['PtPetName'];?></h1>
+        <h2><b><?php echo $row['PtPetName'];?></b></h2>
     </div>
     <div class="col-md-2 dailyListDefault <?php echo $backgroundColor;?> border-top">
-        <h1><?php echo substr($row['BrBreed'],0,9);?></h1>
+        <h2><b><?php echo substr($row['BrBreed'],0,9);?></b></h2>
     </div>
     <div class="col-md-2 dailyListDefault <?php echo $backgroundColor;?> border-top">
-        <h1><?php echo substr($row['CLLastName'],0,9);?></h1>
+        <h2><b><?php echo substr($row['CLLastName'],0,9);?></b></h2>
     </div>
     <div class="col-md-2 dailyListDefault <?php echo $backgroundColor;?> border-top">
-        <h1><?php echo $notMil; ?></h1>
+        <h2><?php echo $notMil; ?></b></h2>
     </div>
     <div class="col-md-1 dailyListDefault <?php echo $backgroundColor;?> radius-right border-top-and-right">
-            <h1><?php if($row['GLGroom']== -1)
+            <h2><b><?php if($row['GLGroom']== -1)
                 {echo "Gr";}
-                else{echo "BB";} ?></h1>
+                else{echo "BB";} ?></b></h2>
     </div>
     <div class="row">
         <div class="col-md-12">
