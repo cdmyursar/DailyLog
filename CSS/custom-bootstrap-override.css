@@ -102,7 +102,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
 }
 
 
-.progress {background: rgba(209, 209, 209, 1); border: 2px solid rgba(0, 0, 0, 1); border-radius: 5px; height: 40px;}
+.progress {background: rgba(209, 209, 209, 1); border: 2px solid rgba(0, 0, 0, 1); border-radius: 5px; height: 30px;}
 .progress-bar-custom {background: rgba(61, 61, 61, 1);} 
 .progress-striped .progress-bar-custom {background-color: rgba(61, 61, 61, 1); background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255, 255, 255, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255, 255, 255, 0.15)),color-stop(0.75,rgba(255, 255, 255, 0.15)),color-stop(0.75,transparent),to(transparent))); background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent); background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent); background-size: 77px 77px;}
 

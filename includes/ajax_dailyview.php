@@ -33,12 +33,12 @@ $sql = "SELECT GroomingLog.GLCall, GroomingLog.GLTakenBy, GroomingLog.GLGroom,
         $progressBarStatus = progress($row['GLF'],$row['GLD'],$row['GLB'],$row['GLR']);
          
         //$groomerInitials = groomercount($row['GLTakenBy']);
-        if($groomerInitials == null || $groomerInitials!= $row['GLTakenBy']){
-            $groomerInitials = array_push($groomerInitials, $row['GLTakenBy']);
-            $groomerInitials[$row['GLTakenBy']]=1;
-        } 
-            
-        $groomerInitials[$row['GLTakenBy']]+=1;
+//        if($groomerInitials == null || $groomerInitials!= $row['GLTakenBy']){
+//            $groomerInitials = array_push($groomerInitials, $row['GLTakenBy']);
+//            $groomerInitials[$row['GLTakenBy']]=1;
+//        } 
+//            
+//        $groomerInitials[$row['GLTakenBy']]+=1;
          
         $tagNumber++;
         if($checkOut != -1)
