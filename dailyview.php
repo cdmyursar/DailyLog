@@ -1,4 +1,10 @@
 <?php
+session_start();
+$_SESSION['cageNumber'];
+if($_SESSION['cageNumber']==""){
+        $_SESSION['cageNumber']=1;
+    }
+
 include '/includes/header.php';
 include '/includes/connect.php';
 ?>
